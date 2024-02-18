@@ -1,0 +1,14 @@
+.layout {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+.header, .footer {
+    padding: 20px;
+}
+
+.main {
+    max-width: 1920px;
+    margin: 0 auto;
+}
