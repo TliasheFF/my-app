@@ -4,11 +4,18 @@
     grid-template-rows: auto 1fr auto;
   }
 
-.header, .footer {
+.header {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
     padding: 20px;
 }
 
 .main {
     max-width: 1920px;
     margin: 0 auto;
+}
+
+.footer {
+    padding: 20px;
 }
