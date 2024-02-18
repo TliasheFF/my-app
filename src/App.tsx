@@ -1,3 +1,10 @@
+import { UsersPage } from "./components/pages/users-page/component";
+import { Layout } from "./layout/component";
+
 export const App = () => {
-  return <div>myapp</div>;
+  return (
+    <Layout>
+      <UsersPage />
+    </Layout>
+  );
 };
