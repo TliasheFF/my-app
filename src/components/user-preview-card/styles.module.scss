@@ -1,0 +1,84 @@
+.card {
+    display: grid;
+	grid-template-rows: auto 1fr auto;
+    text-align: left;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    min-width: 250px;
+
+    &:hover {
+        box-shadow: 0 0 8px rgba(70, 70, 70, 0.764);
+        transition: 300ms;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+    }
+
+    &__name {
+        margin: 0;
+        padding-right: 15px;
+        font-weight: bold;
+    }
+
+    &__state {
+        padding: 0 4px;
+        font-size: 10px;
+
+        &_active{
+            border-bottom: 2px solid green;
+            color: darkgreen;
+        }
+
+        &_inactive{
+            border-bottom: 2px solid red;
+            color: darkred;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        font-family: inherit;
+        font-size: 14px;
+        color: grey;
+    }
+
+    &__line {
+        width: 100%;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 5px;
+    }
+
+    &__button {
+        background: none;
+        border: none;
+
+        &:hover {
+            background: rgb(226, 226, 226);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        opacity: 0.5;
+
+        &:hover {
+            opacity: 1;
+            transition: 300ms;
+        }
+    }
+}
