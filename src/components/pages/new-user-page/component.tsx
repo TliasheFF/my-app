@@ -57,6 +57,14 @@ export const NewUserPage: FC = () => {
       </div>
 
       <div className={styles.form__group}>
+        <label htmlFor="login" className={styles.form__label}>
+          * Логин
+        </label>
+        <input className={styles.form__field} {...register("login", { required: true })} />
+        <div>{errors.login && <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>}</div>
+      </div>
+
+      <div className={styles.form__group}>
         <label htmlFor="role" className={styles.form__label}>
           Роль
         </label>

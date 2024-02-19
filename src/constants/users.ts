@@ -7,6 +7,7 @@ export type UserType = {
     patronymic: string;
     role: string;
     email: string;
+    login: string;
     blocked: boolean;
 }
 
@@ -18,6 +19,7 @@ export const Users: UsersType = [
       patronymic: "Иванович",
       role: "reader",
       email: "ivanov.ii@example.com",
+      login: "ivanov.ii",
       blocked: true,
     },
     {
@@ -27,6 +29,7 @@ export const Users: UsersType = [
       patronymic: "Павловна",
       role: "admin",
       email: "petrova.pp@example.com",
+      login: "petrova.pp",
       blocked: true,
     },
     {
@@ -36,6 +39,7 @@ export const Users: UsersType = [
       patronymic: "",
       role: "editor",
       email: "sergeev.s@example.com",
+      login: "sergeev.s",
       blocked: false,
     },
     {
@@ -45,6 +49,7 @@ export const Users: UsersType = [
       patronymic: "",
       role: "editor",
       email: "konstantinov.k@example.com",
+      login: "konstantinov.k",
       blocked: false,
     },    
   ];
