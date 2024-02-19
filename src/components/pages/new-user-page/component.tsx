@@ -4,18 +4,27 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/component";
 import { UserType } from "../../../constants/users";
 import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../redux/users/users-slice";
+import { uid } from "uid";
 
 type FormData = Omit<UserType, "id">;
 
 export const NewUserPage: FC = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>();
 
   const formSubmit: SubmitHandler<FormData> = (data): void => {
     console.log(data);
+    dispatch(addUser({ ...data, id: uid() }));
+    alert("Пользователь успешно создан!");
+    reset();
   };
 
   return (
