@@ -1,16 +1,19 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/component";
+import { UserType } from "../../../constants/users";
+
+type FormData = Pick<UserType, "lastName">;
 
 export const NewUserPage: FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
-  const formSubmit = (data) => {
+  const formSubmit: SubmitHandler<FormData> = (data): void => {
     console.log(data);
   };
 
