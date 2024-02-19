@@ -10,6 +10,8 @@ import { uid } from "uid";
 
 type FormData = Omit<UserType, "id">;
 
+const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
+
 export const NewUserPage: FC = () => {
   const dispatch = useDispatch();
 
@@ -34,7 +36,7 @@ export const NewUserPage: FC = () => {
           * Фамилия
         </label>
         <input className={styles.form__field} {...register("lastName", { required: true })} />
-        <div>{errors.lastName && <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>}</div>
+        <div>{errors.lastName && errorMessage}</div>
       </div>
 
       <div className={styles.form__group}>
@@ -42,7 +44,7 @@ export const NewUserPage: FC = () => {
           * Имя
         </label>
         <input className={styles.form__field} {...register("firstName", { required: true })} />
-        <div>{errors.firstName && <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>}</div>
+        <div>{errors.firstName && errorMessage}</div>
       </div>
 
       <div className={styles.form__group}>
@@ -62,7 +64,7 @@ export const NewUserPage: FC = () => {
           className={styles.form__field}
           {...register("email", { required: true, pattern: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/ })}
         />
-        <div>{errors.email && <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>}</div>
+        <div>{errors.email && errorMessage}</div>
       </div>
 
       <div className={styles.form__group}>
@@ -70,7 +72,7 @@ export const NewUserPage: FC = () => {
           * Логин
         </label>
         <input className={styles.form__field} {...register("login", { required: true })} />
-        <div>{errors.login && <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>}</div>
+        <div>{errors.login && errorMessage}</div>
       </div>
 
       <div className={styles.form__group}>
