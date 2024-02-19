@@ -26,9 +26,18 @@
         color: white;
         transition: border-color 0.3s;
 
+        &::placeholder {
+            color: rgb(71, 71, 71);
+            font-style: italic;
+        }
+
         &:focus {
             border-bottom: 2px solid #7980ff;
         }
+    }
+
+    &__option {
+        color: black;
     }
 
     &__errorMessage {
