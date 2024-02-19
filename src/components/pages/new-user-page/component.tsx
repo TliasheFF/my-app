@@ -3,8 +3,9 @@ import styles from "./styles.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/component";
 import { UserType } from "../../../constants/users";
+import classNames from "classnames";
 
-type FormData = Omit<UserType, "id" | "blocked">;
+type FormData = Omit<UserType, "id">;
 
 export const NewUserPage: FC = () => {
   const {
@@ -71,6 +72,13 @@ export const NewUserPage: FC = () => {
             Редактор
           </option>
         </select>
+      </div>
+
+      <div className={classNames(styles.form__group, styles.form__group_checkbox)}>
+        <label htmlFor="blocked" className={styles.form__label}>
+          Заблокировать пользователя:
+        </label>
+        <input type="checkbox" className={styles.form__field} {...register("blocked")} />
       </div>
 
       <Button>Создать</Button>
