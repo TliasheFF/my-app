@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Users } from "../../constants/users-mocks";
+import { Users } from "../../constants/users";
 
 export const userSlice = createSlice({
     name: 'user',
