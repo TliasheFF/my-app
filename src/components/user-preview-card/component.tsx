@@ -30,7 +30,7 @@ export const UserPreviewCard: FC<Props> = ({ userId }) => {
       </div>
 
       <div className={styles.card__info}>
-        <div>{role?.name}</div>
+        <div>{role && role.name}</div>
         <div>&#9993; {email}</div>
       </div>
 
