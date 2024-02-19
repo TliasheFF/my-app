@@ -1,17 +1,19 @@
 import { UsersPage } from "./components/pages/users-page/component";
 import { Layout } from "./components/layout/component";
-import { Route, Routes } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { NewUserPage } from "./components/pages/new-user-page/component";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "users", element: <UsersPage /> },
+      { path: "new-user", element: <NewUserPage /> },
+    ],
+  },
+]);
+
 export const App = () => {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="users" element={<UsersPage />} />
-          <Route path="new-user" element={<NewUserPage />} />
-        </Route>
-      </Routes>
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
