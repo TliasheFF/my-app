@@ -55,4 +55,8 @@
             content: "\2757";
         }
     }
+
+    @media screen and (max-width: 576px) {
+        min-width: 275px;
+    }
 }

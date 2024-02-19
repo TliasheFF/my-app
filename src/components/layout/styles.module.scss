@@ -5,10 +5,13 @@
   }
 
 .header {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: center;
     gap: 15px;
     padding: 20px;
+    background-color: #242424cb;
 }
 
 .main {
