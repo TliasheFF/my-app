@@ -10,7 +10,7 @@ export const UsersPage: FC = () => {
   return users?.length ? (
     <div className={styles.cardsContainer}>
       {users.map((user) => (
-        <UserPreviewCard key={user.id} user={user} />
+        <UserPreviewCard key={user.id} userId={user.id} />
       ))}
     </div>
   ) : (

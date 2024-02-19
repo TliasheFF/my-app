@@ -1,20 +1,27 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { UserType } from "../../constants/users-mocks";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
+import { StateType } from "../../redux/store";
 
 type Props = {
-  user: UserType;
+  userId: string;
 };
 
-export const UserPreviewCard: FC<Props> = ({ user }) => {
-  const { lastName, firstName, patronymic, email, role, blocked } = user;
+export const UserPreviewCard: FC<Props> = ({ userId }) => {
+  const user = useSelector((state: StateType) => state.user.users.find((user) => user.id === userId));
+
+  if (!user) {
+    return null;
+  }
+
+  const { lastName, firstName, patronymic, blocked, role, email } = user;
 
   return (
     <div className={styles.card}>
       <div className={styles.card__header}>
         <p className={styles.card__name}>
-          &#128100;{lastName} {firstName.slice(0, 1)}. {patronymic ? `${patronymic.slice(0, 1)}.` : ""}
+          &#128100;{lastName} {firstName.slice(0, 1)}. {patronymic && `${patronymic.slice(0, 1)}.`}
         </p>
         <span className={classNames(styles.card__state, blocked ? styles.card__state_inactive : styles.card__state_active)}>
           {blocked ? "заблокирован" : "активен"}
