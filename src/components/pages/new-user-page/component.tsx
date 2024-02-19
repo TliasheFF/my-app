@@ -4,15 +4,17 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/component";
 import { UserType } from "../../../constants/users";
 import classNames from "classnames";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../../redux/users/users-slice";
 import { uid } from "uid";
+import { StateType } from "../../../redux/store";
 
 type FormData = Omit<UserType, "id">;
 
 const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
 
 export const NewUserPage: FC = () => {
+  const roles = useSelector((state: StateType) => state.role.roles);
   const dispatch = useDispatch();
 
   const {
@@ -81,15 +83,11 @@ export const NewUserPage: FC = () => {
         </label>
         <select className={styles.form__field} {...register("role")}>
           <option value=""></option>
-          <option value="admin" className={styles.form__option}>
-            Администратор
-          </option>
-          <option value="reader" className={styles.form__option}>
-            Читатель
-          </option>
-          <option value="editor" className={styles.form__option}>
-            Редактор
-          </option>
+          {roles.map((role) => (
+            <option value={role.id} className={styles.form__option}>
+              {role.name}
+            </option>
+          ))}
         </select>
       </div>
 
