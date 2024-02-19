@@ -24,7 +24,7 @@ export const UserPreviewCard: FC<Props> = ({ userId }) => {
         <p className={styles.card__name} title={`${lastName} ${firstName} ${patronymic}`}>
           &#128100;{lastName} {firstName.slice(0, 1)}. {patronymic && `${patronymic.slice(0, 1)}.`}
         </p>
-        <span className={classNames(styles.card__state, blocked ? styles.card__state_inactive : styles.card__state_active)}>
+        <span className={classNames(styles.card__state, styles[blocked ? "card__state_inactive" : "card__state_active"])}>
           {blocked ? "заблокирован" : "активен"}
         </span>
       </div>
