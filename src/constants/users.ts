@@ -7,6 +7,7 @@ export type UserType = {
     patronymic: string;
     role: string;
     email: string;
+    login: string;
     blocked: boolean;
 }
 
@@ -16,8 +17,9 @@ export const Users: UsersType = [
       firstName: "Иван",
       lastName: "Иванов",
       patronymic: "Иванович",
-      role: "Reader",
+      role: "reader",
       email: "ivanov.ii@example.com",
+      login: "ivanov.ii",
       blocked: true,
     },
     {
@@ -25,8 +27,9 @@ export const Users: UsersType = [
       firstName: "Полина",
       lastName: "Петрова",
       patronymic: "Павловна",
-      role: "Admin",
+      role: "admin",
       email: "petrova.pp@example.com",
+      login: "petrova.pp",
       blocked: true,
     },
     {
@@ -34,8 +37,9 @@ export const Users: UsersType = [
       firstName: "Сергей",
       lastName: "Сергеев",
       patronymic: "",
-      role: "Editor",
-      email: "sergeev.ss@example.com",
+      role: "editor",
+      email: "sergeev.s@example.com",
+      login: "sergeev.s",
       blocked: false,
     },
     {
@@ -43,8 +47,9 @@ export const Users: UsersType = [
       firstName: "Константин",
       lastName: "Константинов",
       patronymic: "",
-      role: "Editor",
+      role: "editor",
       email: "konstantinov.k@example.com",
+      login: "konstantinov.k",
       blocked: false,
     },    
   ];
