@@ -10,12 +10,13 @@ type Props = {
 
 export const UserPreviewCard: FC<Props> = ({ userId }) => {
   const user = useSelector((state: StateType) => state.user.users.find((user) => user.id === userId));
+  const role = useSelector((state: StateType) => state.role.roles.find((role) => role.id === user?.role));
 
   if (!user) {
     return null;
   }
 
-  const { lastName, firstName, patronymic, blocked, role, email } = user;
+  const { lastName, firstName, patronymic, blocked, email } = user;
 
   return (
     <div className={styles.card}>
@@ -29,7 +30,7 @@ export const UserPreviewCard: FC<Props> = ({ userId }) => {
       </div>
 
       <div className={styles.card__info}>
-        <div>{role}</div>
+        <div>{role?.name}</div>
         <div>&#9993; {email}</div>
       </div>
 

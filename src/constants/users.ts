@@ -35,7 +35,7 @@ export const Users: UsersType = [
       lastName: "Сергеев",
       patronymic: "",
       role: "editor",
-      email: "sergeev.ss@example.com",
+      email: "sergeev.s@example.com",
       blocked: false,
     },
     {
