@@ -13,72 +13,72 @@
         box-shadow: 0 0 8px rgba(199, 199, 199, 0.856);
         transition: 300ms;
     }
+}
 
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 15px;
+.card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+.card__name {
+    margin: 0;
+    padding-right: 15px;
+    font-weight: bold;
+}
+
+.card__state {
+    padding: 0 4px;
+    font-size: 10px; 
+}
+
+.card__state_active{
+    border-bottom: 2px solid green;
+    color: darkgreen;
+}
+
+.card__state_inactive{
+    border-bottom: 2px solid red;
+    color: darkred;
+}
+
+.card__info {
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    font-size: 14px;
+    color: grey;
+}
+
+.card__line {
+    width: 100%;
+}
+
+.card__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.card__button {
+    background: none;
+    border: none;
+
+    &:hover {
+        background: rgb(226, 226, 226);
+        border-radius: 5px;
+        cursor: pointer;
     }
+}
 
-    &__name {
-        margin: 0;
-        padding-right: 15px;
-        font-weight: bold;
-    }
+.card__icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
 
-    &__state {
-        padding: 0 4px;
-        font-size: 10px;
-
-        &_active{
-            border-bottom: 2px solid green;
-            color: darkgreen;
-        }
-
-        &_inactive{
-            border-bottom: 2px solid red;
-            color: darkred;
-        }
-    }
-
-    &__info {
-        display: flex;
-        flex-direction: column;
-        font-family: inherit;
-        font-size: 14px;
-        color: grey;
-    }
-
-    &__line {
-        width: 100%;
-    }
-
-    &__footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 5px;
-    }
-
-    &__button {
-        background: none;
-        border: none;
-
-        &:hover {
-            background: rgb(226, 226, 226);
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    }
-
-    &__icon {
-        width: 20px;
-        height: 20px;
-        opacity: 0.5;
-
-        &:hover {
-            opacity: 1;
-            transition: 300ms;
-        }
+    &:hover {
+        opacity: 1;
+        transition: 300ms;
     }
 }

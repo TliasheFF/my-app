@@ -8,7 +8,7 @@ export const UsersPage: FC = () => {
   const users = useSelector(selectUsers);
 
   return users?.length ? (
-    <div className={styles.cardsContainer}>
+    <div className={styles.cards}>
       {users.map((user) => (
         <UserPreviewCard key={user.id} userId={user.id} />
       ))}

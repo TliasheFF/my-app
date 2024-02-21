@@ -8,7 +8,7 @@ export const Layout: FC = () => {
     <div className={styles.layout}>
       <header className={styles.header}>
         <nav>
-          <ul className={styles.header__navigation}>
+          <ul className={styles.navigation}>
             <li>
               <Link to="/users">
                 <Button>Пользователи</Button>
