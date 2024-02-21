@@ -8,12 +8,20 @@ export const Layout: FC = () => {
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
-        <Link to="/users">
-          <Button>Пользователи</Button>
-        </Link>
-        <Link to="/new-user">
-          <Button>Создать пользователя</Button>
-        </Link>
+        <nav>
+          <ul className={styles.header__navigation}>
+            <li>
+              <Link to="/users">
+                <Button>Пользователи</Button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/new-user">
+                <Button>Создать пользователя</Button>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </header>
       <main className={styles.main}>
         <Outlet />

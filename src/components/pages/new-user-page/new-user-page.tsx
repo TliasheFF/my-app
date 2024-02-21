@@ -25,7 +25,6 @@ export const NewUserPage: FC = () => {
 
   const formSubmit: SubmitHandler<FormData> = (data): void => {
     dispatch(addUser({ ...data, id: uid() }));
-    alert("Пользователь успешно создан!");
     reset();
   };
 
