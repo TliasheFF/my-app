@@ -11,7 +11,7 @@ export type User = {
     blocked: boolean;
 }
 
-export const Users: Users = [
+export const users: Users = [
     {
       id: "1708096993534",
       firstName: "Иван",

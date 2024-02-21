@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { Button } from "../button/component";
+import { Button } from "../button/button";
 import { Link, Outlet } from "react-router-dom";
 
 // добавить тэг nav и добавить ul/li

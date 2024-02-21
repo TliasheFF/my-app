@@ -5,7 +5,7 @@ export type Role = {
     name: string;
 }
 
-export const Roles: Roles = [
+export const roles: Roles = [
     {
         id: 'admin',
         name: 'Администратор',

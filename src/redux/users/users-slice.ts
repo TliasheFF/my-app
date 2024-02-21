@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { User, Users } from "../../constants/users";
+import { User, users } from "../../constants/users";
 
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        users: [...Users]
+        users: [...users]
     },
     reducers: {
         addUser: (state, action: PayloadAction<User> ) => {

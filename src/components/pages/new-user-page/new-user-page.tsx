@@ -1,13 +1,13 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "../../button/component";
+import { Button } from "../../button/button";
 import { User } from "../../../constants/users";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../../redux/users/users-slice";
 import { uid } from "uid";
-import { Roles } from "../../../constants/roles";
+import { roles } from "../../../constants/roles";
 
 type FormData = Omit<User, "id">;
 
@@ -81,7 +81,7 @@ export const NewUserPage: FC = () => {
         </label>
         <select className={styles.form__field} {...register("role")}>
           <option value=""></option>
-          {Roles.map((role) => (
+          {roles.map((role) => (
             <option value={role.id} className={styles.form__option}>
               {role.name}
             </option>
