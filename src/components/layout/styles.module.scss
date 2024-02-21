@@ -5,17 +5,24 @@
   }
 
 .header {
+    padding: 20px 0;
     position: sticky;
     top: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 20px;
+    text-align: center;
     background-color: #242424cb;
 }
 
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .main {
-    max-width: 1920px;
+    max-width: 1600px;
     margin: 0 auto;
 }
 

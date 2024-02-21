@@ -1,11 +1,11 @@
-export type RolesType = RoleType[]
+export type Roles = Role[]
 
-export type RoleType = {
+export type Role = {
     id: string;
     name: string;
 }
 
-export const Roles: RolesType = [
+export const roles: Roles = [
     {
         id: 'admin',
         name: 'Администратор',

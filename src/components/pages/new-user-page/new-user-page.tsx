@@ -1,20 +1,19 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "../../button/component";
-import { UserType } from "../../../constants/users";
+import { Button } from "../../button/button";
+import { User } from "../../../constants/users";
 import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../../../redux/users/users-slice";
 import { uid } from "uid";
-import { StateType } from "../../../redux/store";
+import { roles } from "../../../constants/roles";
 
-type FormData = Omit<UserType, "id">;
-
-const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
+type FormData = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
-  const roles = useSelector((state: StateType) => state.role.roles);
+  const mailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
+  const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
   const dispatch = useDispatch();
 
   const {
@@ -25,9 +24,7 @@ export const NewUserPage: FC = () => {
   } = useForm<FormData>();
 
   const formSubmit: SubmitHandler<FormData> = (data): void => {
-    console.log(data);
     dispatch(addUser({ ...data, id: uid() }));
-    alert("Пользователь успешно создан!");
     reset();
   };
 
@@ -64,7 +61,7 @@ export const NewUserPage: FC = () => {
           type="email"
           placeholder="name@example.com"
           className={styles.form__field}
-          {...register("email", { required: true, pattern: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/ })}
+          {...register("email", { required: true, pattern: mailPattern })}
         />
         <div>{errors.email && errorMessage}</div>
       </div>

@@ -1,14 +1,14 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useSelector } from "react-redux";
-import { StateType } from "../../../redux/store";
-import { UserPreviewCard } from "../../user-preview-card/component";
+import { UserPreviewCard } from "../../user-preview-card/user-preview-card";
+import { selectUsers } from "../../../redux/users/selectors";
 
 export const UsersPage: FC = () => {
-  const users = useSelector((state: StateType) => state.user.users);
+  const users = useSelector(selectUsers);
 
   return users?.length ? (
-    <div className={styles.cardsContainer}>
+    <div className={styles.cards}>
       {users.map((user) => (
         <UserPreviewCard key={user.id} userId={user.id} />
       ))}
