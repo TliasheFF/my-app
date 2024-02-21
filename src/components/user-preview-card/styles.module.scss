@@ -26,6 +26,11 @@
     margin: 0;
     padding-right: 15px;
     font-weight: bold;
+
+    &::before {
+        display: inline;
+        content: "\1F464";
+    }
 }
 
 .card__state {
@@ -51,6 +56,14 @@
     color: grey;
 }
 
+.card__mail {
+    &::before {
+        display: inline;
+        margin-right: 3px;
+        content: "\2709";
+    }
+}
+
 .card__line {
     width: 100%;
 }
@@ -58,27 +71,5 @@
 .card__footer {
     display: flex;
     justify-content: flex-end;
-    gap: 5px;
-}
-
-.card__button {
-    background: none;
-    border: none;
-
-    &:hover {
-        background: rgb(226, 226, 226);
-        border-radius: 5px;
-        cursor: pointer;
-    }
-}
-
-.card__icon {
-    width: 20px;
-    height: 20px;
-    opacity: 0.5;
-
-    &:hover {
-        opacity: 1;
-        transition: 300ms;
-    }
+    gap: 10px;
 }

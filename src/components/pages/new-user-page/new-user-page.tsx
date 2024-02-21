@@ -11,9 +11,9 @@ import { roles } from "../../../constants/roles";
 
 type FormData = Omit<User, "id">;
 
-const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
-
 export const NewUserPage: FC = () => {
+  const mailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
+  const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
   const dispatch = useDispatch();
 
   const {
@@ -61,7 +61,7 @@ export const NewUserPage: FC = () => {
           type="email"
           placeholder="name@example.com"
           className={styles.form__field}
-          {...register("email", { required: true, pattern: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/ })}
+          {...register("email", { required: true, pattern: mailPattern })}
         />
         <div>{errors.email && errorMessage}</div>
       </div>
