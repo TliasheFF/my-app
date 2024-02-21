@@ -4,13 +4,14 @@ import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { State } from "../../redux/store";
 import { roles } from "../../constants/roles";
+import { selectorUserById } from "../../redux/users/selectors";
 
 type Props = {
   userId: string;
 };
 
 export const UserPreviewCard: FC<Props> = ({ userId }) => {
-  const user = useSelector((state: State) => state.user.users.find((user) => user.id === userId));
+  const user = useSelector((state: State) => selectorUserById(state, userId));
   const userRole = roles.find((role) => role.id === user?.role);
 
   if (!user) {

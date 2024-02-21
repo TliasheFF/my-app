@@ -1,11 +1,11 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useSelector } from "react-redux";
-import { State } from "../../../redux/store";
 import { UserPreviewCard } from "../../user-preview-card/user-preview-card";
+import { selectorUsers } from "../../../redux/users/selectors";
 
 export const UsersPage: FC = () => {
-  const users = useSelector((state: State) => state.user.users);
+  const users = useSelector(selectorUsers);
 
   return users?.length ? (
     <div className={styles.cardsContainer}>

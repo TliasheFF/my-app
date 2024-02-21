@@ -3,7 +3,6 @@ import styles from "./styles.module.scss";
 import { Button } from "../button/button";
 import { Link, Outlet } from "react-router-dom";
 
-// добавить тэг nav и добавить ul/li
 export const Layout: FC = () => {
   return (
     <div className={styles.layout}>
