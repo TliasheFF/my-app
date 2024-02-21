@@ -2,7 +2,7 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
-import { StateType } from "../../redux/store";
+import { State } from "../../redux/store";
 import { roles } from "../../constants/roles";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const UserPreviewCard: FC<Props> = ({ userId }) => {
-  const user = useSelector((state: StateType) => state.user.users.find((user) => user.id === userId));
+  const user = useSelector((state: State) => state.user.users.find((user) => user.id === userId));
   const userRole = roles.find((role) => role.id === user?.role);
 
   if (!user) {

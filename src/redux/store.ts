@@ -5,4 +5,4 @@ export const store = configureStore({
     reducer: combineSlices(userSlice),
 })
 
-export type StateType = ReturnType<typeof store.getState>;
+export type State = ReturnType<typeof store.getState>;
