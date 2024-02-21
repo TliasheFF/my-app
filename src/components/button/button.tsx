@@ -7,7 +7,9 @@ type Props = {
   disabled?: boolean;
 };
 
-export const Button: FC<Props> = ({ children, onClick, disabled }) => {
+export const Button: FC<Props> = (props) => {
+  const { children, onClick, disabled } = props;
+
   return (
     <button className={styles.button} onClick={onClick} disabled={disabled}>
       {children}

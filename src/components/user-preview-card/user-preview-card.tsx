@@ -10,7 +10,8 @@ type Props = {
   userId: string;
 };
 
-export const UserPreviewCard: FC<Props> = ({ userId }) => {
+export const UserPreviewCard: FC<Props> = (props) => {
+  const { userId } = props;
   const user = useSelector((state: State) => selectUserById(state, userId));
   const userRole = roles.find((role) => role.id === user?.role);
 
