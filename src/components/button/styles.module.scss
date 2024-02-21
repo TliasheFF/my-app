@@ -16,4 +16,9 @@
     &:disabled {
         opacity: 0.5;
     }
+
+    @media screen and (max-width: 375px) {
+        font-size: 12px;
+        padding: 8px;
+    }
 }

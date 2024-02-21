@@ -1,6 +1,6 @@
-export type UsersType = UserType[];
+export type Users = User[];
 
-export type UserType = {
+export type User = {
     id: string;
     firstName: string;
     lastName: string;
@@ -11,7 +11,7 @@ export type UserType = {
     blocked: boolean;
 }
 
-export const Users: UsersType = [
+export const Users: Users = [
     {
       id: "1708096993534",
       firstName: "Иван",

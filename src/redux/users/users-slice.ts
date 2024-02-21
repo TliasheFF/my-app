@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Users } from "../../constants/users";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { User, Users } from "../../constants/users";
 
 export const userSlice = createSlice({
     name: 'user',
@@ -7,7 +7,7 @@ export const userSlice = createSlice({
         users: [...Users]
     },
     reducers: {
-        addUser: (state, action) => {
+        addUser: (state, action: PayloadAction<User> ) => {
             state.users.push(action.payload);
         }
     },

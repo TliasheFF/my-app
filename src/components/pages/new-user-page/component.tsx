@@ -2,19 +2,18 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/component";
-import { UserType } from "../../../constants/users";
+import { User } from "../../../constants/users";
 import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../../../redux/users/users-slice";
 import { uid } from "uid";
-import { StateType } from "../../../redux/store";
+import { Roles } from "../../../constants/roles";
 
-type FormData = Omit<UserType, "id">;
+type FormData = Omit<User, "id">;
 
 const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
 
 export const NewUserPage: FC = () => {
-  const roles = useSelector((state: StateType) => state.role.roles);
   const dispatch = useDispatch();
 
   const {
@@ -25,7 +24,6 @@ export const NewUserPage: FC = () => {
   } = useForm<FormData>();
 
   const formSubmit: SubmitHandler<FormData> = (data): void => {
-    console.log(data);
     dispatch(addUser({ ...data, id: uid() }));
     alert("Пользователь успешно создан!");
     reset();
@@ -83,7 +81,7 @@ export const NewUserPage: FC = () => {
         </label>
         <select className={styles.form__field} {...register("role")}>
           <option value=""></option>
-          {roles.map((role) => (
+          {Roles.map((role) => (
             <option value={role.id} className={styles.form__option}>
               {role.name}
             </option>

@@ -4,7 +4,8 @@
     grid-gap: 20px;
     grid-auto-rows: minmax(100px, auto);
     margin: 0 auto;
-
+    
+// поменять под отзывчиваю и убрать медиавыражения
     @media screen and (max-width: 1200px) {
         grid-template-columns: repeat(3, 1fr);
     }

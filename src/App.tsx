@@ -3,6 +3,7 @@ import { Layout } from "./components/layout/component";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { NewUserPage } from "./components/pages/new-user-page/component";
 
+// вынести отдельно в файл
 const router = createBrowserRouter([
   {
     path: "/",
