@@ -19,6 +19,7 @@ export const NewUserPage: FC = () => {
   const currentUser = useSelector((state: State) => selectUserById(state, userId ?? ""));
   const mailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
   const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
+  const buttonTitle = userId ? "Сохранить" : "Создать";
   const dispatch = useDispatch();
 
   const {
@@ -93,7 +94,6 @@ export const NewUserPage: FC = () => {
           Роль
         </label>
         <select className={styles.form__field} {...register("role")}>
-          <option value=""></option>
           {roles.map((role) => (
             <option key={role.id} value={role.id} className={styles.form__option}>
               {role.name}
@@ -109,7 +109,7 @@ export const NewUserPage: FC = () => {
         <input type="checkbox" className={styles.form__field} {...register("blocked")} />
       </div>
 
-      <Button disabled={!isDirty}>{currentUser ? "Сохранить" : "Создать"}</Button>
+      <Button disabled={!isDirty}>{buttonTitle}</Button>
     </form>
   );
 };
