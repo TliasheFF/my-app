@@ -1,50 +1,27 @@
 .p404 {
+    padding: 25px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 100vh;
 }
 
 .p404__image {
-    width: 25%;
+    width: 350px;
+}
 
-    @media screen and (max-width: 992px) {
-        width: 50%;
-    }
-
-    @media screen and (max-width: 576px) {
-        width: 75%;
-    }
+.p404__code {
+    margin: 0;
+    text-align: center;
+    font-size: 8rem;
+    font-weight: bold;
+    color: #646cff;
 }
 
 .p404__text {
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-bottom: 25px;
     text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-
-    @media screen and (max-width: 992px) {
-        font-size: 24px;
-    }
-
-
-    @media screen and (max-width: 576px) {
-        font-size: 20px;
-    }
-}
-
-.p404__line {
-    font-weight: normal;
-    color: rgba(158, 158, 158, 0.541);
-    padding: 0 10px;
-}
-
-.p404__link {
-    text-align: center;
-
-    &:visited {
-        color: rgba(141, 141, 247, 0.747);
-    }
+    font-size: 1rem;
 }
