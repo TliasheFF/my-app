@@ -5,7 +5,7 @@ import { Button } from "../../button/button";
 import { User } from "../../../constants/users";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../../../redux/users/users-slice";
+import { addUser, updateUser } from "../../../redux/users/users-slice";
 import { uid } from "uid";
 import { roles } from "../../../constants/roles";
 import { useParams } from "react-router-dom";
@@ -31,8 +31,12 @@ export const NewUserPage: FC = () => {
   });
 
   const formSubmit: SubmitHandler<FormData> = (data): void => {
-    dispatch(addUser({ ...data, id: uid() }));
-    reset();
+    if (isDirty && userId) {
+      dispatch(updateUser({ ...data, id: userId }));
+    } else {
+      dispatch(addUser({ ...data, id: uid() }));
+      reset();
+    }
   };
 
   return (
