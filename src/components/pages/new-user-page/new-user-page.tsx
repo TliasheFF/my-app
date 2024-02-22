@@ -24,7 +24,7 @@ export const NewUserPage: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
   } = useForm<FormData>({
     defaultValues: currentUser,
@@ -102,7 +102,7 @@ export const NewUserPage: FC = () => {
         <input type="checkbox" className={styles.form__field} {...register("blocked")} />
       </div>
 
-      <Button>Создать</Button>
+      <Button disabled={!isDirty}>{currentUser ? "Сохранить" : "Создать"}</Button>
     </form>
   );
 };
