@@ -10,6 +10,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "users", element: <UsersPage /> },
       { path: "new-user", element: <NewUserPage /> },
+      { path: "users/:userId/edit", element: <NewUserPage /> },
     ],
   },
 ]);

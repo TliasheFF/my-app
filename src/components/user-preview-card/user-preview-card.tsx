@@ -7,6 +7,7 @@ import { roles } from "../../constants/roles";
 import { selectUserById } from "../../redux/users/selectors";
 import { EditIcon } from "../icons/edit-icon";
 import { DeleteIcon } from "../icons/delete-icon";
+import { Link } from "react-router-dom";
 
 type Props = {
   userId: string;
@@ -43,7 +44,9 @@ export const UserPreviewCard: FC<Props> = (props) => {
       <hr className={styles.card__line} />
 
       <div className={styles.card__footer}>
-        <EditIcon title="Редактировать" handleClick={() => {}} />
+        <Link to={`/users/${userId}/edit`}>
+          <EditIcon title="Редактировать" handleClick={() => {}} />
+        </Link>
         <DeleteIcon title="Удалить" handleClick={() => {}} />
       </div>
     </div>

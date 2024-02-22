@@ -4,14 +4,19 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/button";
 import { User } from "../../../constants/users";
 import classNames from "classnames";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../../redux/users/users-slice";
 import { uid } from "uid";
 import { roles } from "../../../constants/roles";
+import { useParams } from "react-router-dom";
+import { selectUserById } from "../../../redux/users/selectors";
+import { State } from "../../../redux/store";
 
 type FormData = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
+  const { userId } = useParams();
+  const currentUser = useSelector((state: State) => selectUserById(state, userId ?? ""));
   const mailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
   const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
   const dispatch = useDispatch();
@@ -21,7 +26,9 @@ export const NewUserPage: FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: currentUser,
+  });
 
   const formSubmit: SubmitHandler<FormData> = (data): void => {
     dispatch(addUser({ ...data, id: uid() }));
