@@ -13,8 +13,12 @@ export const userSlice = createSlice({
 
         updateUser: (state, action: PayloadAction<User>) => {
             state.users = state.users.map(user => user.id === action.payload.id ? action.payload : user)
+        },
+
+        deleteUser: (state, action: PayloadAction<string>) => {
+            state.users = state.users.filter(user => user.id !== action.payload)
         }
     },
 })
 
-export const { addUser, updateUser } = userSlice.actions;
+export const { addUser, updateUser, deleteUser } = userSlice.actions;
