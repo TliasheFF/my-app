@@ -33,6 +33,9 @@ export const NewUserPage: FC = () => {
   const formSubmit: SubmitHandler<FormData> = (data): void => {
     if (isDirty && userId) {
       dispatch(updateUser({ ...data, id: userId }));
+      reset({
+        ...data,
+      });
     } else {
       dispatch(addUser({ ...data, id: uid() }));
       reset();
@@ -92,7 +95,7 @@ export const NewUserPage: FC = () => {
         <select className={styles.form__field} {...register("role")}>
           <option value=""></option>
           {roles.map((role) => (
-            <option value={role.id} className={styles.form__option}>
+            <option key={role.id} value={role.id} className={styles.form__option}>
               {role.name}
             </option>
           ))}
