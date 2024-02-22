@@ -4,28 +4,43 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/button";
 import { User } from "../../../constants/users";
 import classNames from "classnames";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../../redux/users/users-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, updateUser } from "../../../redux/users/users-slice";
 import { uid } from "uid";
 import { roles } from "../../../constants/roles";
+import { useParams } from "react-router-dom";
+import { selectUserById } from "../../../redux/users/selectors";
+import { State } from "../../../redux/store";
 
 type FormData = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
+  const { userId } = useParams();
+  const currentUser = useSelector((state: State) => selectUserById(state, userId ?? ""));
   const mailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
   const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
+  const buttonTitle = userId ? "Сохранить" : "Создать";
   const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: currentUser,
+  });
 
   const formSubmit: SubmitHandler<FormData> = (data): void => {
-    dispatch(addUser({ ...data, id: uid() }));
-    reset();
+    if (isDirty && userId) {
+      dispatch(updateUser({ ...data, id: userId }));
+      reset({
+        ...data,
+      });
+    } else {
+      dispatch(addUser({ ...data, id: uid() }));
+      reset();
+    }
   };
 
   return (
@@ -79,9 +94,8 @@ export const NewUserPage: FC = () => {
           Роль
         </label>
         <select className={styles.form__field} {...register("role")}>
-          <option value=""></option>
           {roles.map((role) => (
-            <option value={role.id} className={styles.form__option}>
+            <option key={role.id} value={role.id} className={styles.form__option}>
               {role.name}
             </option>
           ))}
@@ -95,7 +109,7 @@ export const NewUserPage: FC = () => {
         <input type="checkbox" className={styles.form__field} {...register("blocked")} />
       </div>
 
-      <Button>Создать</Button>
+      <Button disabled={!isDirty}>{buttonTitle}</Button>
     </form>
   );
 };
