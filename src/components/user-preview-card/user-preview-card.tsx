@@ -47,7 +47,7 @@ export const UserPreviewCard: FC<Props> = (props) => {
 
       <div className={styles.card__footer}>
         <Link to={`/users/${userId}/edit`}>
-          <EditIcon title="Редактировать" handleClick={() => {}} />
+          <EditIcon title="Редактировать" />
         </Link>
         <DeleteIcon
           title="Удалить"
