@@ -27,6 +27,7 @@ export const NewUserPage: FC = () => {
     formState: { errors, isDirty },
     reset,
   } = useForm<FormData>({
+    mode: "onBlur",
     defaultValues: currentUser,
   });
 
