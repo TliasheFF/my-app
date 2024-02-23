@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import { selectUserById } from "../../../redux/users/selectors";
 import { State } from "../../../redux/store";
 
-type FormData = Omit<User, "id">;
+type FormValues = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
@@ -26,12 +26,12 @@ export const NewUserPage: FC = () => {
     handleSubmit,
     formState: { errors, isDirty },
     reset,
-  } = useForm<FormData>({
+  } = useForm<FormValues>({
     mode: "onBlur",
     defaultValues: currentUser,
   });
 
-  const formSubmit: SubmitHandler<FormData> = (data): void => {
+  const formSubmit: SubmitHandler<FormValues> = (data): void => {
     if (isDirty && userId) {
       dispatch(updateUser({ ...data, id: userId }));
       reset({
