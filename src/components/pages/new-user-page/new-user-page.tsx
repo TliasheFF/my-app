@@ -14,6 +14,16 @@ import { State } from "../../../redux/store";
 
 type FormValues = Omit<User, "id">;
 
+const newUserDefaultValues = {
+  lastName: "",
+  firstName: "",
+  patronymic: "",
+  role: "",
+  email: "",
+  login: "",
+  blocked: false,
+};
+
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
   const currentUser = useSelector((state: State) => selectUserById(state, userId ?? ""));
@@ -50,7 +60,7 @@ export const NewUserPage: FC = () => {
           * Фамилия
         </label>
         <input className={styles.form__field} {...register("lastName", { required: true })} />
-        <span className={styles.form__error}>{errors.lastName && errorMessage}</span>
+        {errors?.lastName && <span className={styles.form__error}>{errorMessage}</span>}
       </div>
 
       <div className={styles.form__group}>
@@ -58,7 +68,7 @@ export const NewUserPage: FC = () => {
           * Имя
         </label>
         <input className={styles.form__field} {...register("firstName", { required: true })} />
-        <span className={styles.form__error}>{errors.firstName && errorMessage}</span>
+        {errors?.firstName && <span className={styles.form__error}>{errorMessage}</span>}
       </div>
 
       <div className={styles.form__group}>
@@ -78,7 +88,7 @@ export const NewUserPage: FC = () => {
           className={styles.form__field}
           {...register("email", { required: true, pattern: mailPattern })}
         />
-        <span className={styles.form__error}>{errors.email && errorMessage}</span>
+        {errors?.email && <span className={styles.form__error}>{errorMessage}</span>}
       </div>
 
       <div className={styles.form__group}>
@@ -86,7 +96,7 @@ export const NewUserPage: FC = () => {
           * Логин
         </label>
         <input className={styles.form__field} {...register("login", { required: true })} />
-        <span className={styles.form__error}>{errors.login && errorMessage}</span>
+        {errors?.login && <span className={styles.form__error}>{errorMessage}</span>}
       </div>
 
       <div className={styles.form__group}>
@@ -110,6 +120,11 @@ export const NewUserPage: FC = () => {
       </div>
 
       <Button disabled={!isDirty}>{userId ? "Сохранить" : "Создать"}</Button>
+      {!userId && (
+        <Button type="button" onClick={() => reset(newUserDefaultValues)}>
+          Очистить форму
+        </Button>
+      )}
     </form>
   );
 };

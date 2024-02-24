@@ -7,19 +7,19 @@ export type Role = {
 
 export const roles: Roles = [
     {
-        id: 'none',
+        id: '111',
         name: '',
     },
     {
-        id: 'admin',
+        id: '112',
         name: 'Администратор',
     },
     {
-        id: 'reader',
+        id: '113',
         name: 'Читатель',
     },
     {
-        id: 'editor',
+        id: '114',
         name: 'Редактор',
     },
 ]
