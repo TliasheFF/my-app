@@ -9,8 +9,14 @@
 
     &:enabled:hover {
         border-color: #646cff;
-        opacity: 0.7;
+        opacity: 0.8;
         cursor: pointer;
+    }
+
+    &:enabled:active {
+        transform: translateY(2px);
+        opacity: 0.7;
+        transition: 0.3s all;
     }
 
     &:disabled {
