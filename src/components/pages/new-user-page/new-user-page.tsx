@@ -12,14 +12,13 @@ import { useParams } from "react-router-dom";
 import { selectUserById } from "../../../redux/users/selectors";
 import { State } from "../../../redux/store";
 
-type FormData = Omit<User, "id">;
+type FormValues = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
   const currentUser = useSelector((state: State) => selectUserById(state, userId ?? ""));
   const mailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
-  const errorMessage = <span className={styles.form__errorMessage}>поле обязательно для заполнения</span>;
-  const buttonTitle = userId ? "Сохранить" : "Создать";
+  const errorMessage = "Поле обязательно для заполнения";
   const dispatch = useDispatch();
 
   const {
@@ -27,11 +26,12 @@ export const NewUserPage: FC = () => {
     handleSubmit,
     formState: { errors, isDirty },
     reset,
-  } = useForm<FormData>({
+  } = useForm<FormValues>({
+    mode: "onBlur",
     defaultValues: currentUser,
   });
 
-  const formSubmit: SubmitHandler<FormData> = (data): void => {
+  const formSubmit: SubmitHandler<FormValues> = (data): void => {
     if (isDirty && userId) {
       dispatch(updateUser({ ...data, id: userId }));
       reset({
@@ -50,7 +50,7 @@ export const NewUserPage: FC = () => {
           * Фамилия
         </label>
         <input className={styles.form__field} {...register("lastName", { required: true })} />
-        <div>{errors.lastName && errorMessage}</div>
+        <span className={styles.form__error}>{errors.lastName && errorMessage}</span>
       </div>
 
       <div className={styles.form__group}>
@@ -58,7 +58,7 @@ export const NewUserPage: FC = () => {
           * Имя
         </label>
         <input className={styles.form__field} {...register("firstName", { required: true })} />
-        <div>{errors.firstName && errorMessage}</div>
+        <span className={styles.form__error}>{errors.firstName && errorMessage}</span>
       </div>
 
       <div className={styles.form__group}>
@@ -78,7 +78,7 @@ export const NewUserPage: FC = () => {
           className={styles.form__field}
           {...register("email", { required: true, pattern: mailPattern })}
         />
-        <div>{errors.email && errorMessage}</div>
+        <span className={styles.form__error}>{errors.email && errorMessage}</span>
       </div>
 
       <div className={styles.form__group}>
@@ -86,7 +86,7 @@ export const NewUserPage: FC = () => {
           * Логин
         </label>
         <input className={styles.form__field} {...register("login", { required: true })} />
-        <div>{errors.login && errorMessage}</div>
+        <span className={styles.form__error}>{errors.login && errorMessage}</span>
       </div>
 
       <div className={styles.form__group}>
@@ -109,7 +109,7 @@ export const NewUserPage: FC = () => {
         <input type="checkbox" className={styles.form__field} {...register("blocked")} />
       </div>
 
-      <Button disabled={!isDirty}>{buttonTitle}</Button>
+      <Button disabled={!isDirty}>{userId ? "Сохранить" : "Создать"}</Button>
     </form>
   );
 };

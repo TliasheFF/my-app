@@ -51,12 +51,7 @@
     color: black;
 }
 
-.form__errorMessage {
+.form__error {
     color: rgba(255, 0, 0, 0.63);
     font-size: small;
-
-    &::before {
-        display: inline;
-        content: "\2757";
-    }
 }

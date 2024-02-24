@@ -1,0 +1,27 @@
+.p404 {
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.p404__image {
+    width: 350px;
+}
+
+.p404__code {
+    margin: 0;
+    text-align: center;
+    font-size: 8rem;
+    font-weight: bold;
+    color: #646cff;
+}
+
+.p404__text {
+    margin: 0;
+    padding-bottom: 25px;
+    text-align: center;
+    font-size: 1rem;
+}
