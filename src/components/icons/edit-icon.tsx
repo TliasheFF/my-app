@@ -11,7 +11,7 @@ export const EditIcon: FC<Props> = (props) => {
 
   return (
     <svg className={styles.icon} viewBox="0 0 24 24" onClick={handleClick}>
-      <use href="/src/assets/sprite.svg#edit" />
+      <use href="/src/assets/images/sprite.svg#edit" />
       <title>{title}</title>
     </svg>
   );

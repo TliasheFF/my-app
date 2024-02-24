@@ -11,7 +11,7 @@ export const DeleteIcon: FC<Props> = (props) => {
 
   return (
     <svg className={styles.icon} viewBox="0 0 24 24" onClick={handleClick}>
-      <use href="/src/assets/sprite.svg#delete" />
+      <use href="/src/assets/images/sprite.svg#delete" />
       <title>{title}</title>
     </svg>
   );
