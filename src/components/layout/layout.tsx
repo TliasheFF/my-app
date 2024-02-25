@@ -1,5 +1,5 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
+import styles from "./layout.module.scss";
 import { Button } from "../button/button";
 import { Link, Outlet } from "react-router-dom";
 

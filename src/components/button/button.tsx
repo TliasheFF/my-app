@@ -1,5 +1,5 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
+import styles from "./button.module.scss";
 
 type Props = {
   children: string;

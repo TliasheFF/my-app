@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import styles from "./styles.module.scss";
+import styles from "./new-user-page.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../button/button";
 import { User } from "../../../constants/users";
@@ -45,7 +45,7 @@ export const NewUserPage: FC = () => {
 
   const showModal = () => {
     setModalActive(true);
-    setTimeout(() => setModalActive(false), 2000);
+    setTimeout(() => setModalActive(false), 1500);
   };
 
   const formSubmit: SubmitHandler<FormValues> = (data): void => {
@@ -77,7 +77,7 @@ export const NewUserPage: FC = () => {
           <label htmlFor="firstName" className={styles.form__label}>
             * Имя
           </label>
-          <input className={styles.form__field} {...register("firstName", { required: false })} />
+          <input className={styles.form__field} {...register("firstName", { required: true })} />
           {errors?.firstName && <span className={styles.form__error}>{errorMessage}</span>}
         </div>
 
@@ -96,7 +96,7 @@ export const NewUserPage: FC = () => {
             type="email"
             placeholder="name@example.com"
             className={styles.form__field}
-            {...register("email", { required: false, pattern: mailPattern })}
+            {...register("email", { required: true, pattern: mailPattern })}
           />
           {errors?.email && <span className={styles.form__error}>{errorMessage}</span>}
         </div>
@@ -105,7 +105,7 @@ export const NewUserPage: FC = () => {
           <label htmlFor="login" className={styles.form__label}>
             * Логин
           </label>
-          <input className={styles.form__field} {...register("login", { required: false })} />
+          <input className={styles.form__field} {...register("login", { required: true })} />
           {errors?.login && <span className={styles.form__error}>{errorMessage}</span>}
         </div>
 

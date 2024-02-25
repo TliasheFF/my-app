@@ -21,7 +21,7 @@ export const Modal: FC<Props> = (props) => {
           {mode === "confirm" && (
             <div className={styles.modal__buttons}>
               <Button onClick={handleSubmit}>Ок</Button>
-              <Button onClick={() => setModalState(false)}>Отмена</Button>
+              <Button onClick={() => setModalState(!modalState)}>Отмена</Button>
             </div>
           )}
         </div>
