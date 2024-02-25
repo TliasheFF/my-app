@@ -139,7 +139,7 @@ export const NewUserPage: FC = () => {
       <Modal
         text={userId ? "Изменения успешно сохранены!" : "Пользователь успешно создан!"}
         modalState={modalActive}
-        setModalState={() => setModalActive(!modalActive)}
+        setModalState={setModalActive}
       />
     </>
   );
