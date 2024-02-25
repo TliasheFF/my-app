@@ -1,5 +1,5 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
+import styles from "./users-page.module.scss";
 import { useSelector } from "react-redux";
 import { UserPreviewCard } from "../../user-preview-card/user-preview-card";
 import { selectUsers } from "../../../redux/users/selectors";

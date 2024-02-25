@@ -1,5 +1,5 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
+import styles from "./not-found-page.module.scss";
 import { Link } from "react-router-dom";
 import { Button } from "../../button/button";
 

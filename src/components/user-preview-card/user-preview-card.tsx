@@ -1,5 +1,5 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
+import { FC, useState } from "react";
+import styles from "./user-preview-card.module.scss";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../redux/store";
@@ -9,6 +9,7 @@ import { EditIcon } from "../icons/edit-icon";
 import { DeleteIcon } from "../icons/delete-icon";
 import { Link } from "react-router-dom";
 import { deleteUser } from "../../redux/users/users-slice";
+import { Modal } from "../modal/modal";
 
 type Props = {
   userId: string;
@@ -18,6 +19,7 @@ export const UserPreviewCard: FC<Props> = (props) => {
   const { userId } = props;
   const user = useSelector((state: State) => selectUserById(state, userId));
   const dispatch = useDispatch();
+  const [modalActive, setModalActive] = useState(false);
 
   if (!user) {
     return null;
@@ -49,13 +51,17 @@ export const UserPreviewCard: FC<Props> = (props) => {
         <Link to={`/users/${userId}/edit`}>
           <EditIcon title="Редактировать" />
         </Link>
-        <DeleteIcon
-          title="Удалить"
-          handleClick={() => {
-            dispatch(deleteUser(userId));
-          }}
-        />
+        <DeleteIcon title="Удалить" handleClick={() => setModalActive(true)} />
       </div>
+      <Modal
+        mode="confirm"
+        text="Вы действительно хотите удалить выбранного пользователя?"
+        modalState={modalActive}
+        setModalState={setModalActive}
+        handleSubmit={() => {
+          dispatch(deleteUser(userId));
+        }}
+      />
     </div>
   );
 };
