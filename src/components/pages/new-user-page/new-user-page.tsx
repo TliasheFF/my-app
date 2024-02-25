@@ -45,7 +45,7 @@ export const NewUserPage: FC = () => {
 
   const showModal = () => {
     setModalActive(true);
-    setTimeout(() => setModalActive(false), 1500);
+    setTimeout(setModalActive, 1500, false);
   };
 
   const formSubmit: SubmitHandler<FormValues> = (data): void => {
