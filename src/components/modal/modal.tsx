@@ -1,31 +1,29 @@
 import { FC } from "react";
 import styles from "./modal.module.scss";
 import { Button } from "../button/button";
+import classNames from "classnames";
 
 type Props = {
   mode?: "alert" | "confirm";
-  text: string;
+  children: React.ReactNode;
   modalState: boolean;
   setModalState: (value: boolean) => void;
   handleSubmit?: () => void;
 };
 
 export const Modal: FC<Props> = (props) => {
-  const { mode = "alert", text, modalState, setModalState, handleSubmit } = props;
+  const { mode = "alert", children, modalState, setModalState, handleSubmit } = props;
+  const activeModalStyle = modalState && styles.modal_active;
 
   return (
-    modalState && (
-      <div className={styles.modal}>
-        <div className={styles.modal__window}>
-          <p className={styles.modal__text}>{text}</p>
-          {mode === "confirm" && (
-            <div className={styles.modal__buttons}>
-              <Button onClick={handleSubmit}>Ок</Button>
-              <Button onClick={() => setModalState(!modalState)}>Отмена</Button>
-            </div>
-          )}
+    <div className={classNames(styles.modal, activeModalStyle)}>
+      <div className={styles.modal__content}>{children}</div>
+      {mode === "confirm" && (
+        <div className={styles.modal__buttons}>
+          <Button onClick={handleSubmit}>Ок</Button>
+          <Button onClick={() => setModalState(!modalState)}>Отмена</Button>
         </div>
-      </div>
-    )
+      )}
+    </div>
   );
 };

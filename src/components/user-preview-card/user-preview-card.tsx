@@ -55,13 +55,14 @@ export const UserPreviewCard: FC<Props> = (props) => {
       </div>
       <Modal
         mode="confirm"
-        text="Вы действительно хотите удалить выбранного пользователя?"
         modalState={modalActive}
         setModalState={setModalActive}
         handleSubmit={() => {
           dispatch(deleteUser(userId));
         }}
-      />
+      >
+        Вы действительно хотите удалить пользователя "{userName}"?
+      </Modal>
     </div>
   );
 };
