@@ -1,0 +1,81 @@
+.card {
+    display: grid;
+	grid-template-rows: auto 1fr auto;
+    text-align: left;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    min-width: 250px;
+
+    &:hover {
+        box-shadow: 0 0 8px rgba(199, 199, 199, 0.856);
+        transition: 300ms;
+    }
+}
+
+.card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+.card__name {
+    margin: 0;
+    padding-right: 15px;
+    font-weight: bold;
+
+    &::before {
+        display: inline;
+        content: "\1F464";
+    }
+}
+
+.card__state {
+    padding: 0 4px;
+    font-size: 10px; 
+}
+
+.card__state_active{
+    border-bottom: 2px solid green;
+    color: darkgreen;
+}
+
+.card__state_inactive{
+    border-bottom: 2px solid red;
+    color: darkred;
+}
+
+.card__info {
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    font-size: 14px;
+    color: grey;
+}
+
+.card__mail {
+    &::before {
+        display: inline;
+        margin-right: 3px;
+        content: "\2709";
+    }
+}
+
+.card__line {
+    width: 100%;
+}
+
+.card__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.card__button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
