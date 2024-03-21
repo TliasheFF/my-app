@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./app/App.tsx";
 import { Provider } from "react-redux";
 import { store } from "./app/redux/store.ts";
+import { App } from "./app/app.tsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 

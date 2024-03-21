@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./layout.module.scss";
-import { Button } from "../../shared/button/button";
+import { Button } from "../../components/button/button";
 import { Link, Outlet } from "react-router-dom";
 
 export const Layout: FC = () => {

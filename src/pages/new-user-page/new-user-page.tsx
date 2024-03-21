@@ -1,17 +1,17 @@
 import { FC, useState } from "react";
 import styles from "./new-user-page.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "../../shared/button/button";
+import { Button } from "../../shared/ui/components/button/button";
 import { User } from "../../shared/types/users-type";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { uid } from "uid";
 import { roles } from "../../shared/mocks/roles";
 import { useParams } from "react-router-dom";
-import { Modal } from "../../shared/modal/modal";
+import { Modal } from "../../shared/ui/components/modal/modal";
 import { State } from "../../app/redux/store";
-import { selectUserById } from "../../app/redux/users/selectors";
-import { addUser, updateUser } from "../../app/redux/users/users-slice";
+import { selectUserById } from "../../app/redux/selectors/selectors";
+import { addUser, updateUser } from "../../app/redux/slices/users-slice";
 
 type FormValuesType = Omit<User, "id">;
 

@@ -4,12 +4,12 @@ import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { roles } from "../../shared/mocks/roles";
 import { Link } from "react-router-dom";
-import { Modal } from "../../shared/modal/modal";
-import { deleteUser } from "../../app/redux/users/users-slice";
-import { selectUserById } from "../../app/redux/users/selectors";
+import { Modal } from "../../shared/ui/components/modal/modal";
+import { deleteUser } from "../../app/redux/slices/users-slice";
+import { selectUserById } from "../../app/redux/selectors/selectors";
 import { State } from "../../app/redux/store";
-import { EditIcon } from "../../shared/icons/edit-icon";
-import { DeleteIcon } from "../../shared/icons/delete-icon";
+import { EditIcon } from "../../shared/ui/components/icons/edit-icon";
+import { DeleteIcon } from "../../shared/ui/components/icons/delete-icon";
 
 type UserPreviewCardPropsTypes = {
   userId: string;
@@ -48,7 +48,7 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
       <hr className={styles.card__line} />
 
       <div className={styles.card__footer}>
-        <Link to={`/users/${userId}/edit`}>
+        <Link to={`/users/${userId}`}>
           <button className={styles.card__button}>
             <EditIcon title="Редактировать" />
           </button>
