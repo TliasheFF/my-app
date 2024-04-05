@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { users } from "../../../shared/mocks/users";
 import { User } from "../../../shared/types/users-type";
+import { State } from "../store";
 
 export const userSlice = createSlice({
     name: 'user',
@@ -23,3 +24,7 @@ export const userSlice = createSlice({
 })
 
 export const { addUser, updateUser, deleteUser } = userSlice.actions;
+
+// selectors
+export const selectUsers = (state: State) => state.user.users;
+export const selectUserById = (state: State, id: string) => selectUsers(state).find((user) => user.id === id);

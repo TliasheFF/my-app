@@ -1,54 +1,45 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styles from "./new-user-page.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "../../shared/ui/components/button/button";
 import { User } from "../../shared/types/users-type";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { uid } from "uid";
 import { roles } from "../../shared/mocks/roles";
 import { useParams } from "react-router-dom";
-import { Modal } from "../../shared/ui/components/modal/modal";
 import { State } from "../../app/redux/store";
-import { selectUserById } from "../../app/redux/selectors/selectors";
+import { selectUserById } from "../../app/redux/slices/users-slice";
 import { addUser, updateUser } from "../../app/redux/slices/users-slice";
+import { MAIL_PATTERN, ERROR_MESSAGE, NEW_USER_DEFAULT_VALUES } from "../../shared/constants";
+import { Button } from "../../shared/ui/components/button/button";
+import { notification } from "antd";
+import { NotificationType } from "../../shared/types/notification-type";
 
-type FormValuesType = Omit<User, "id">;
-
-const newUserDefaultValues = {
-  lastName: "",
-  firstName: "",
-  patronymic: "",
-  role: "",
-  email: "",
-  login: "",
-  blocked: false,
-};
+type NewUserType = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
   const currentUser = useSelector((state: State) => selectUserById(state, userId ?? ""));
-  const mailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
-  const errorMessage = "Поле обязательно для заполнения";
   const dispatch = useDispatch();
-  const [modalActive, setModalActive] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type: NotificationType) => {
+    api[type]({
+      message: userId ? "Изменения успешно сохранены!" : "Пользователь успешно создан!",
+    });
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty },
     reset,
-  } = useForm<FormValuesType>({
+  } = useForm<NewUserType>({
     mode: "onBlur",
     defaultValues: currentUser,
   });
 
-  const showModal = () => {
-    setModalActive(true);
-    setTimeout(setModalActive, 1500, false);
-  };
-
-  const formSubmit: SubmitHandler<FormValuesType> = (data): void => {
+  const formSubmit: SubmitHandler<NewUserType> = (data): void => {
     if (isDirty && userId) {
       dispatch(updateUser({ ...data, id: userId }));
       reset({
@@ -59,18 +50,19 @@ export const NewUserPage: FC = () => {
       reset();
     }
 
-    showModal();
+    openNotificationWithIcon("info");
   };
 
   return (
     <>
+      {contextHolder}
       <form className={styles.form} onSubmit={handleSubmit(formSubmit)}>
         <div className={styles.form__group}>
           <label htmlFor="lastName" className={styles.form__label}>
             * Фамилия
           </label>
           <input className={styles.form__field} {...register("lastName", { required: true })} />
-          {errors?.lastName && <span className={styles.form__error}>{errorMessage}</span>}
+          {errors?.lastName && <span className={styles.form__error}>{ERROR_MESSAGE}</span>}
         </div>
 
         <div className={styles.form__group}>
@@ -78,7 +70,7 @@ export const NewUserPage: FC = () => {
             * Имя
           </label>
           <input className={styles.form__field} {...register("firstName", { required: true })} />
-          {errors?.firstName && <span className={styles.form__error}>{errorMessage}</span>}
+          {errors?.firstName && <span className={styles.form__error}>{ERROR_MESSAGE}</span>}
         </div>
 
         <div className={styles.form__group}>
@@ -96,9 +88,9 @@ export const NewUserPage: FC = () => {
             type="email"
             placeholder="name@example.com"
             className={styles.form__field}
-            {...register("email", { required: true, pattern: mailPattern })}
+            {...register("email", { required: true, pattern: MAIL_PATTERN })}
           />
-          {errors?.email && <span className={styles.form__error}>{errorMessage}</span>}
+          {errors?.email && <span className={styles.form__error}>{ERROR_MESSAGE}</span>}
         </div>
 
         <div className={styles.form__group}>
@@ -106,7 +98,7 @@ export const NewUserPage: FC = () => {
             * Логин
           </label>
           <input className={styles.form__field} {...register("login", { required: true })} />
-          {errors?.login && <span className={styles.form__error}>{errorMessage}</span>}
+          {errors?.login && <span className={styles.form__error}>{ERROR_MESSAGE}</span>}
         </div>
 
         <div className={styles.form__group}>
@@ -129,16 +121,13 @@ export const NewUserPage: FC = () => {
           <input type="checkbox" className={styles.form__field} {...register("blocked")} />
         </div>
 
-        <Button disabled={!isDirty}>{userId ? "Сохранить" : "Создать"}</Button>
-        {!userId && (
-          <Button type="button" onClick={() => reset(newUserDefaultValues)}>
-            Очистить форму
-          </Button>
-        )}
+        {/* TODO: поменять кнопки на antd */}
+
+        <Button type="submit" disabled={!isDirty}>
+          {userId ? "Сохранить" : "Создать"}
+        </Button>
+        {!userId && <Button onClick={() => reset(NEW_USER_DEFAULT_VALUES)}>Очистить форму</Button>}
       </form>
-      <Modal modalState={modalActive} setModalState={setModalActive}>
-        {userId ? "Изменения успешно сохранены!" : "Пользователь успешно создан!"}
-      </Modal>
     </>
   );
 };

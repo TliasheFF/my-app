@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./not-found-page.module.scss";
 import { Link } from "react-router-dom";
-import { Button } from "../../shared/ui/components/button/button";
+import { Button } from "antd";
 
 export const NotFoundPage: FC = () => {
   return (

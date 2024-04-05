@@ -5,3 +5,10 @@ body {
     color: white;
     font-family: system-ui, Arial, sans-serif;
 }
+
+:root {
+    --button-background-color: #1a1a1a;
+    --button-border-color: #7980ff;
+    --button-font-color: #fff;
+    --error: rgba(255, 0, 0, 0.63);
+}

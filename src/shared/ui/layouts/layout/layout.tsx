@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./layout.module.scss";
-import { Button } from "../../components/button/button";
 import { Link, Outlet } from "react-router-dom";
+import { Button } from "antd";
 
 export const Layout: FC = () => {
   return (
