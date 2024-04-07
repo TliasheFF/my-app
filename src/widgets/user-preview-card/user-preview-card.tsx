@@ -1,15 +1,13 @@
 import { FC, useState } from "react";
 import styles from "./user-preview-card.module.scss";
 import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
 import { roles } from "../../shared/mocks/roles";
 import { Link } from "react-router-dom";
-import { deleteUser } from "../../app/redux/slices/users-slice";
-import { selectUserById } from "../../app/redux/slices/users-slice";
-import { State } from "../../app/redux/store";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { getUserName } from "../../shared/util/get-user-name";
+import { useUnit } from "effector-react";
+import { $users, deleteUserEvent } from "../../app/store/store";
 
 type UserPreviewCardPropsTypes = {
   userId: string;
@@ -17,9 +15,9 @@ type UserPreviewCardPropsTypes = {
 
 export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
   const { userId } = props;
-  const user = useSelector((state: State) => selectUserById(state, userId));
-  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useUnit($users).find((user) => user.id === userId);
+  const deleteUser = useUnit(deleteUserEvent);
 
   if (!user) {
     return null;
@@ -35,7 +33,7 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
   };
 
   const handleModalConfirm = () => {
-    dispatch(deleteUser(userId));
+    deleteUser(userId);
     setIsModalOpen(false);
   };
 

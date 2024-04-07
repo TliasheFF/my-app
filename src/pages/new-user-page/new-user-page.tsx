@@ -3,25 +3,24 @@ import styles from "./new-user-page.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../../shared/types/users-type";
 import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
 import { uid } from "uid";
 import { roles } from "../../shared/mocks/roles";
 import { useParams } from "react-router-dom";
-import { State } from "../../app/redux/store";
-import { selectUserById } from "../../app/redux/slices/users-slice";
-import { addUser, updateUser } from "../../app/redux/slices/users-slice";
 import { MAIL_PATTERN, ERROR_MESSAGE, NEW_USER_DEFAULT_VALUES } from "../../shared/constants";
 import { Button } from "../../shared/ui/components/button/button";
 import { notification } from "antd";
 import { NotificationType } from "../../shared/types/notification-type";
+import { $users, addUserEvent, updateUserEvent } from "../../app/store/store";
+import { useUnit } from "effector-react";
 
 type NewUserType = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
-  const currentUser = useSelector((state: State) => selectUserById(state, userId ?? ""));
-  const dispatch = useDispatch();
+  const currentUser = useUnit($users).find((user) => user.id === userId);
   const [api, contextHolder] = notification.useNotification();
+  const addUser = useUnit(addUserEvent);
+  const updateUser = useUnit(updateUserEvent);
 
   const openNotificationWithIcon = (type: NotificationType) => {
     api[type]({
@@ -41,12 +40,12 @@ export const NewUserPage: FC = () => {
 
   const formSubmit: SubmitHandler<NewUserType> = (data): void => {
     if (isDirty && userId) {
-      dispatch(updateUser({ ...data, id: userId }));
+      updateUser({ ...data, id: userId });
       reset({
         ...data,
       });
     } else {
-      dispatch(addUser({ ...data, id: uid() }));
+      addUser({ ...data, id: uid() });
       reset();
     }
 

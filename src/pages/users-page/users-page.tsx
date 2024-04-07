@@ -1,11 +1,11 @@
 import { FC } from "react";
 import styles from "./users-page.module.scss";
-import { useSelector } from "react-redux";
 import { UserPreviewCard } from "../../widgets/user-preview-card/user-preview-card";
-import { selectUsers } from "../../app/redux/slices/users-slice";
+import { useUnit } from "effector-react";
+import { $users } from "../../app/store/store";
 
 export const UsersPage: FC = () => {
-  const users = useSelector(selectUsers);
+  const users = useUnit($users);
 
   if (!Array.isArray(users) || users.length === 0) {
     return "Нет данных для отображения";
