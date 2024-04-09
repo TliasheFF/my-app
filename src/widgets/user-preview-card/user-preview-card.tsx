@@ -25,7 +25,7 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
 
   const { lastName, firstName, patronymic, blocked, email } = user;
   const { shortName, fullName } = getUserName(lastName, firstName, patronymic);
-  const userRole = roles.find((role) => role.id === user.role);
+  const userRole = roles.find((role) => role.value === user.role);
   const currentStateStyle = styles[blocked ? "card__state_inactive" : "card__state_active"];
 
   const showModal = () => {
@@ -54,7 +54,7 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
         </div>
 
         <div className={styles.card__info}>
-          <div>{userRole && userRole.name}</div>
+          <div>{userRole && userRole.label}</div>
           <div className={styles.card__mail}>{email}</div>
         </div>
 
@@ -77,6 +77,7 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
           open={isModalOpen}
           onOk={handleModalConfirm}
           onCancel={handleModalCancel}
+          width={400}
         >
           Вы действительно хотите удалить пользователя "{shortName}"?
         </Modal>

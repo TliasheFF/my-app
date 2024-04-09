@@ -2,19 +2,19 @@ import { Roles } from "../types/roles-type";
 
 export const roles: Roles = [
     {
-        id: '111',
-        name: '',
+        value: '',
+        label: '',
     },
     {
-        id: '112',
-        name: 'Администратор',
+        value: 'admin',
+        label: 'Администратор',
     },
     {
-        id: '113',
-        name: 'Читатель',
+        value: 'reader',
+        label: 'Читатель',
     },
     {
-        id: '114',
-        name: 'Редактор',
+        value: 'editor',
+        label: 'Редактор',
     },
 ]
