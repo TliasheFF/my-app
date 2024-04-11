@@ -26,11 +26,11 @@
     margin: 0;
     padding-right: 15px;
     font-weight: bold;
+}
 
-    &::before {
-        display: inline;
-        content: "\1F464";
-    }
+.card__icon {
+    display: inline;
+    margin-right: 5px;
 }
 
 .card__state {
@@ -56,14 +56,6 @@
     color: grey;
 }
 
-.card__mail {
-    &::before {
-        display: inline;
-        margin-right: 3px;
-        content: "\2709";
-    }
-}
-
 .card__line {
     width: 100%;
 }
@@ -80,8 +72,25 @@
     cursor: pointer;
 }
 
-:global(.ant-modal-footer button) {
-    background-color: var(--button-background-color);
+.card__modal :global(.ant-btn-default) {
+    background: var(--button-background-color);
     color: var(--button-font-color);
-    border: 1px solid transparent;
+}
+
+.card__modal :global(.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover) {
+    border-color: var(--button-border-color);
+    color: var(--button-font-color);
+    background-color: var(--button-background-color);
+    opacity: 0.9;
+}
+
+.card__modal :global(.ant-btn-primary) {
+    background: var(--button-background-color);
+}
+
+.card__modal :global(.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover) {
+    border-color: var(--button-border-color);
+    color: var(--button-font-color);
+    background-color: var(--button-background-color);
+    opacity: 0.9;
 }

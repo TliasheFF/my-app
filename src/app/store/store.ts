@@ -13,6 +13,6 @@ export const deleteUserEvent = createEvent<string>();
 $users.on(deleteUserEvent, (state, id) => state.filter((user) => user.id !== id));
 
 export const updateUserEvent = createEvent<User>();
-$users.on(updateUserEvent, (state, newUser) =>
-    state.map((user) => (user.id === newUser.id ? newUser : user))
+$users.on(updateUserEvent, (state, updatedUser) =>
+    state.map((user) => (user.id === updatedUser.id ? updatedUser : user))
 );

@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export type Users = User[];
 
 export type User = {
@@ -8,5 +10,6 @@ export type User = {
     role: string;
     email: string;
     login: string;
+    validTo: dayjs.Dayjs;
     blocked: boolean;
 }

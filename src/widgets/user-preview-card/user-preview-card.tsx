@@ -3,11 +3,19 @@ import styles from "./user-preview-card.module.scss";
 import classNames from "classnames";
 import { roles } from "../../shared/mocks/roles";
 import { Link } from "react-router-dom";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  CalendarOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  MailOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { getUserName } from "../../shared/util/get-user-name";
 import { useUnit } from "effector-react";
 import { $users, deleteUserEvent } from "../../app/store/store";
+import dayjs from "dayjs";
+import { DATE_FORMAT } from "../../shared/constants";
 
 type UserPreviewCardPropsTypes = {
   userId: string;
@@ -23,7 +31,8 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
     return null;
   }
 
-  const { lastName, firstName, patronymic, blocked, email } = user;
+  const { lastName, firstName, patronymic, blocked, email, validTo } = user;
+  const validToDate = dayjs(validTo).format(DATE_FORMAT);
   const { shortName, fullName } = getUserName(lastName, firstName, patronymic);
   const userRole = roles.find((role) => role.value === user.role);
   const currentStateStyle = styles[blocked ? "card__state_inactive" : "card__state_active"];
@@ -42,46 +51,61 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
   };
 
   return (
-    <>
-      <div className={styles.card}>
-        <div className={styles.card__header}>
-          <p className={styles.card__name} title={fullName}>
-            {shortName}
-          </p>
-          <span className={classNames(styles.card__state, currentStateStyle)}>
-            {blocked ? "заблокирован" : "активен"}
-          </span>
-        </div>
-
-        <div className={styles.card__info}>
-          <div>{userRole && userRole.label}</div>
-          <div className={styles.card__mail}>{email}</div>
-        </div>
-
-        <hr className={styles.card__line} />
-
-        <div className={styles.card__footer}>
-          <Button>
-            <Link to={`/users/${userId}`}>
-              <EditOutlined style={{ fontSize: "16px" }} title="Редактировать" />
-            </Link>
-          </Button>
-          <Button onClick={showModal}>
-            <DeleteOutlined style={{ fontSize: "16px" }} title="Удалить" />
-          </Button>
-        </div>
-
-        <Modal
-          cancelText="Отмена"
-          okText="Удалить"
-          open={isModalOpen}
-          onOk={handleModalConfirm}
-          onCancel={handleModalCancel}
-          width={400}
-        >
-          Вы действительно хотите удалить пользователя "{shortName}"?
-        </Modal>
+    <div className={styles.card}>
+      <div className={styles.card__header}>
+        <p className={styles.card__name} title={fullName}>
+          {shortName}
+        </p>
+        <span className={classNames(styles.card__state, currentStateStyle)}>
+          {blocked ? "заблокирован" : "активен"}
+        </span>
       </div>
-    </>
+
+      <div className={styles.card__info}>
+        <div>
+          <div className={styles.card__icon}>
+            <UserOutlined />
+          </div>
+          {userRole ? userRole.label : "Роль не назначена"}
+        </div>
+        <div className={styles.card__mail}>
+          <div className={styles.card__icon}>
+            <MailOutlined />
+          </div>
+          {email}
+        </div>
+        <div>
+          <div className={styles.card__icon}>
+            <CalendarOutlined />
+          </div>
+          Действителен до: {validToDate}
+        </div>
+      </div>
+
+      <hr className={styles.card__line} />
+
+      <div className={styles.card__footer}>
+        <Button>
+          <Link to={`/users/${userId}`}>
+            <EditOutlined style={{ fontSize: "16px" }} title="Редактировать" />
+          </Link>
+        </Button>
+        <Button onClick={showModal}>
+          <DeleteOutlined style={{ fontSize: "16px" }} title="Удалить" />
+        </Button>
+      </div>
+
+      <Modal
+        className={styles.card__modal}
+        cancelText="Отмена"
+        okText="Удалить"
+        open={isModalOpen}
+        onOk={handleModalConfirm}
+        onCancel={handleModalCancel}
+        width={400}
+      >
+        Вы действительно хотите удалить пользователя "{shortName}"?
+      </Modal>
+    </div>
   );
 };

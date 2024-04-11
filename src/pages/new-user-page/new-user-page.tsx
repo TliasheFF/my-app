@@ -5,8 +5,8 @@ import { User } from "../../shared/types/users-type";
 import { uid } from "uid";
 import { roles } from "../../shared/mocks/roles";
 import { useParams } from "react-router-dom";
-import { ERROR_MESSAGE, NEW_USER_DEFAULT_VALUES } from "../../shared/constants";
-import { Button, Form, Input, Select, Space, Switch, notification } from "antd";
+import { DATE_FORMAT, ERROR_MESSAGE, NEW_USER_DEFAULT_VALUES } from "../../shared/constants";
+import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
 import { NotificationType } from "../../shared/types/notification-type";
 import { $users, addUserEvent, updateUserEvent } from "../../app/store/store";
 import { useUnit } from "effector-react";
@@ -19,15 +19,14 @@ export const NewUserPage: FC = () => {
   const [api, contextHolder] = notification.useNotification();
   const addUser = useUnit(addUserEvent);
   const updateUser = useUnit(updateUserEvent);
-  const formInitialValues: NewUserType = currentUser ?? NEW_USER_DEFAULT_VALUES;
+  const [form] = Form.useForm();
+  const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
 
   const openNotificationWithIcon = (type: NotificationType) => {
     api[type]({
       message: userId ? "Изменения успешно сохранены!" : "Пользователь успешно создан!",
     });
   };
-
-  const [form] = Form.useForm();
 
   const formSubmit: SubmitHandler<NewUserType> = (data): void => {
     if (userId) {
@@ -40,7 +39,7 @@ export const NewUserPage: FC = () => {
   };
 
   return (
-    <div className={styles["form"]}>
+    <div className={styles.form}>
       {contextHolder}
       <Form layout="vertical" form={form} initialValues={formInitialValues} onFinish={formSubmit}>
         <Form.Item
@@ -78,7 +77,11 @@ export const NewUserPage: FC = () => {
         </Form.Item>
 
         <Form.Item name="role" label="Роль">
-          <Select options={roles} />
+          <Select options={roles} allowClear />
+        </Form.Item>
+
+        <Form.Item name="validTo" label="Действителен до">
+          <DatePicker placeholder="Выберите дату" format={DATE_FORMAT} />
         </Form.Item>
 
         <Form.Item name="blocked" label="Заблокировать пользователя">
@@ -91,7 +94,11 @@ export const NewUserPage: FC = () => {
               {userId ? "Сохранить" : "Создать"}
             </Button>
 
-            {!userId && <Button htmlType="reset">Очистить форму</Button>}
+            {!userId && (
+              <Button type="primary" htmlType="reset">
+                Очистить форму
+              </Button>
+            )}
           </Space>
         </Form.Item>
       </Form>

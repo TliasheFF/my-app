@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Users } from "../types/users-type";
 
 export const users: Users = [
@@ -9,6 +10,7 @@ export const users: Users = [
       role: "admin",
       email: "ivanov.ii@example.com",
       login: "ivanov.ii",
+      validTo: dayjs('11.01.2022'),
       blocked: true,
     },
     {
@@ -19,6 +21,7 @@ export const users: Users = [
       role: "reader",
       email: "petrova.pp@example.com",
       login: "petrova.pp",
+      validTo: dayjs('07.17.2022'),
       blocked: true,
     },
     {
@@ -29,6 +32,7 @@ export const users: Users = [
       role: "editor",
       email: "sergeev.s@example.com",
       login: "sergeev.s",
+      validTo: dayjs('06.04.2026'),
       blocked: false,
     },
     {
@@ -39,6 +43,7 @@ export const users: Users = [
       role: "reader",
       email: "konstantinov.k@example.com",
       login: "konstantinov.k",
+      validTo: dayjs('06.16.2024'),
       blocked: false,
     },    
   ];
