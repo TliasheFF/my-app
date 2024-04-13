@@ -6,14 +6,14 @@
     }
 }
 
+.form__valid-and-state-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .form__buttons-container {
     display: flex;
     justify-content: center;
-}
-
-.form__valid-group-container {
-    display: flex;
-    justify-content: space-between;
 }
 
 .form :global(.ant-form) {
@@ -28,6 +28,12 @@
 .form :global(.ant-btn-primary) {
     background: var(--button-background-color);
     box-shadow: none;
+
+    &:disabled {
+        color: var(--button-font-color);
+        opacity: 0.5;
+        border: none;
+    }
 }
 
 .form :global(.ant-btn-primary) {

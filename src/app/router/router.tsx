@@ -1,6 +1,6 @@
-import { NewUserPage } from "@/pages/new-user-page/ui/new-user-page";
-import { NotFoundPage } from "@/pages/not-found-page/ui/not-found-page";
-import { UsersPage } from "@/pages/users-page/ui/users-page";
+import { NewUserPage } from "@/pages/new-user-page";
+import { NotFoundPage } from "@/pages/not-found-page";
+import { UsersPage } from "@/pages/users-page";
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "../layout/layout";
 

@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./new-user-page.module.scss";
 import { SubmitHandler } from "react-hook-form";
 import { User } from "@/shared/types";
 import { uid } from "uid";
-import { roles } from "@/shared/mocks/roles";
+import { roles } from "@/shared/mocks";
 import { useParams } from "react-router-dom";
 import { DATE_FORMAT } from "@/shared/constants";
 import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
@@ -22,7 +22,17 @@ export const NewUserPage: FC = () => {
   const addUser = useUnit(addUserEvent);
   const updateUser = useUnit(updateUserEvent);
   const [form] = Form.useForm();
+  const formValues = Form.useWatch([], form);
   const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
+  const [submittable, setSubmittable] = useState(false);
+  const [isFormChanged, setIsFormChanged] = useState(false);
+
+  useEffect(() => {
+    form
+      .validateFields({ validateOnly: true })
+      .then(() => setSubmittable(true))
+      .catch(() => setSubmittable(false));
+  }, [form, formValues]);
 
   const openNotificationWithIcon = (type: NotificationType) => {
     api[type]({
@@ -37,13 +47,20 @@ export const NewUserPage: FC = () => {
       addUser({ ...data, id: uid() });
     }
 
+    setIsFormChanged(false);
     openNotificationWithIcon("info");
   };
 
   return (
     <div className={styles["form"]}>
       {contextHolder}
-      <Form layout="vertical" form={form} initialValues={formInitialValues} onFinish={formSubmit}>
+      <Form
+        layout="vertical"
+        form={form}
+        initialValues={formInitialValues}
+        onFinish={formSubmit}
+        onValuesChange={() => setIsFormChanged(true)}
+      >
         <Form.Item
           name="lastName"
           label="Фамилия"
@@ -82,7 +99,7 @@ export const NewUserPage: FC = () => {
           <Select options={roles} allowClear />
         </Form.Item>
 
-        <Space className={styles["form__valid-group-container"]}>
+        <Space className={styles["form__valid-and-state-container"]}>
           <Form.Item name="validTo" label="Действителен до">
             <DatePicker placeholder="Выберите дату" format={DATE_FORMAT} />
           </Form.Item>
@@ -94,7 +111,7 @@ export const NewUserPage: FC = () => {
 
         <Form.Item>
           <Space className={styles["form__buttons-container"]}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" disabled={!submittable || !isFormChanged}>
               {userId ? "Сохранить" : "Создать"}
             </Button>
 

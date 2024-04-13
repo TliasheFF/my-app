@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import styles from "./user-preview-card.module.scss";
 import classNames from "classnames";
-import { roles } from "@/shared/mocks/roles";
+import { roles } from "@/shared/mocks";
 import { Link } from "react-router-dom";
 import {
   CalendarOutlined,
@@ -11,7 +11,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Button, Modal } from "antd";
-import { getUserName } from "../lib/util/get-user-name";
+import { getUserName } from "../lib/util";
 import { useUnit } from "effector-react";
 import { $users } from "@/app/store/store";
 import dayjs from "dayjs";
