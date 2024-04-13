@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Users } from "../types/users-type";
+import { Users } from "../types";
 
 export const users: Users = [
     {
@@ -29,7 +29,7 @@ export const users: Users = [
       firstName: "Сергей",
       lastName: "Сергеев",
       patronymic: "",
-      role: "editor",
+      role: '',
       email: "sergeev.s@example.com",
       login: "sergeev.s",
       validTo: dayjs('06.04.2026'),

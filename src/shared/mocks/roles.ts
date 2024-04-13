@@ -1,4 +1,5 @@
-import { Roles } from "../types/roles-type";
+import { Roles } from "../types";
+
 
 export const roles: Roles = [
     {

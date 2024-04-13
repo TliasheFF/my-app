@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import styles from "./user-preview-card.module.scss";
 import classNames from "classnames";
-import { roles } from "../../shared/mocks/roles";
+import { roles } from "@/shared/mocks/roles";
 import { Link } from "react-router-dom";
 import {
   CalendarOutlined,
@@ -11,11 +11,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Button, Modal } from "antd";
-import { getUserName } from "../../shared/util/get-user-name";
+import { getUserName } from "../lib/util/get-user-name";
 import { useUnit } from "effector-react";
-import { $users, deleteUserEvent } from "../../app/store/store";
+import { $users } from "@/app/store/store";
 import dayjs from "dayjs";
-import { DATE_FORMAT } from "../../shared/constants";
+import { DATE_FORMAT } from "@/shared/constants";
+import { deleteUserEvent } from "../model";
 
 type UserPreviewCardPropsTypes = {
   userId: string;
@@ -51,58 +52,58 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.card__header}>
-        <p className={styles.card__name} title={fullName}>
+    <div className={styles["card"]}>
+      <div className={styles["card__header"]}>
+        <p className={styles["card__name"]} title={fullName}>
           {shortName}
         </p>
-        <span className={classNames(styles.card__state, currentStateStyle)}>
+        <span className={classNames(styles["card__state"], currentStateStyle)}>
           {blocked ? "заблокирован" : "активен"}
         </span>
       </div>
 
-      <div className={styles.card__info}>
+      <div className={styles["card__info"]}>
         <div>
-          <div className={styles.card__icon}>
+          <div className={styles["card__icon"]}>
             <UserOutlined />
           </div>
           {userRole ? userRole.label : "Роль не назначена"}
         </div>
-        <div className={styles.card__mail}>
-          <div className={styles.card__icon}>
+        <div className={styles["card__mail"]}>
+          <div className={styles["card__icon"]}>
             <MailOutlined />
           </div>
           {email}
         </div>
         <div>
-          <div className={styles.card__icon}>
+          <div className={styles["card__icon"]}>
             <CalendarOutlined />
           </div>
           Действителен до: {validToDate}
         </div>
       </div>
 
-      <hr className={styles.card__line} />
+      <hr className={styles["card__line"]} />
 
-      <div className={styles.card__footer}>
+      <div className={styles["card__footer"]}>
         <Button>
           <Link to={`/users/${userId}`}>
-            <EditOutlined style={{ fontSize: "16px" }} title="Редактировать" />
+            <EditOutlined className={styles["card__button-icon"]} title="Редактировать" />
           </Link>
         </Button>
         <Button onClick={showModal}>
-          <DeleteOutlined style={{ fontSize: "16px" }} title="Удалить" />
+          <DeleteOutlined className={styles["card__button-icon"]} title="Удалить" />
         </Button>
       </div>
 
       <Modal
-        className={styles.card__modal}
+        className={styles["card__modal"]}
         cancelText="Отмена"
         okText="Удалить"
         open={isModalOpen}
         onOk={handleModalConfirm}
         onCancel={handleModalCancel}
-        width={400}
+        width={500}
       >
         Вы действительно хотите удалить пользователя "{shortName}"?
       </Modal>

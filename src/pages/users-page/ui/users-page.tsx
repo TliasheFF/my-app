@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styles from "./users-page.module.scss";
-import { UserPreviewCard } from "../../widgets/user-preview-card/user-preview-card";
+import { UserPreviewCard } from "@/entities/user-preview-card/ui/user-preview-card";
 import { useUnit } from "effector-react";
-import { $users } from "../../app/store/store";
+import { $users } from "@/app/store/store";
 
 export const UsersPage: FC = () => {
   const users = useUnit($users);
@@ -12,7 +12,7 @@ export const UsersPage: FC = () => {
   }
 
   return (
-    <div className={styles.cards}>
+    <div className={styles["cards"]}>
       {users.map((user) => (
         <UserPreviewCard key={user.id} userId={user.id} />
       ))}

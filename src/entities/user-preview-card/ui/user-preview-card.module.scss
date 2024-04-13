@@ -72,6 +72,10 @@
     cursor: pointer;
 }
 
+.card__button-icon {
+    font-size: 16px;
+} 
+
 .card__modal :global(.ant-btn-default) {
     background: var(--button-background-color);
     color: var(--button-font-color);

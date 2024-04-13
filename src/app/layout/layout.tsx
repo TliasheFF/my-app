@@ -5,10 +5,10 @@ import { Button } from "antd";
 
 export const Layout: FC = () => {
   return (
-    <div className={styles.layout}>
-      <header className={styles.header}>
+    <div className={styles["layout"]}>
+      <header className={styles["header"]}>
         <nav>
-          <ul className={styles.navigation}>
+          <ul className={styles["navigation"]}>
             <li>
               <Link to="/users">
                 <Button>Пользователи</Button>
@@ -22,10 +22,10 @@ export const Layout: FC = () => {
           </ul>
         </nav>
       </header>
-      <main className={styles.main}>
+      <main className={styles["main"]}>
         <Outlet />
       </main>
-      <footer className={styles.footer}></footer>
+      <footer className={styles["footer"]}></footer>
     </div>
   );
 };

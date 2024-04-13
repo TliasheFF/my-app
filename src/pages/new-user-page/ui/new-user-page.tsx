@@ -1,15 +1,17 @@
 import { FC } from "react";
 import styles from "./new-user-page.module.scss";
 import { SubmitHandler } from "react-hook-form";
-import { User } from "../../shared/types/users-type";
+import { User } from "@/shared/types";
 import { uid } from "uid";
-import { roles } from "../../shared/mocks/roles";
+import { roles } from "@/shared/mocks/roles";
 import { useParams } from "react-router-dom";
-import { DATE_FORMAT, ERROR_MESSAGE, NEW_USER_DEFAULT_VALUES } from "../../shared/constants";
+import { DATE_FORMAT } from "@/shared/constants";
 import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
-import { NotificationType } from "../../shared/types/notification-type";
-import { $users, addUserEvent, updateUserEvent } from "../../app/store/store";
+import { NotificationType } from "@/shared/types";
+import { $users } from "@/app/store/store";
 import { useUnit } from "effector-react";
+import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
+import { addUserEvent, updateUserEvent } from "../model";
 
 type NewUserType = Omit<User, "id">;
 
@@ -39,7 +41,7 @@ export const NewUserPage: FC = () => {
   };
 
   return (
-    <div className={styles.form}>
+    <div className={styles["form"]}>
       {contextHolder}
       <Form layout="vertical" form={form} initialValues={formInitialValues} onFinish={formSubmit}>
         <Form.Item
@@ -80,16 +82,18 @@ export const NewUserPage: FC = () => {
           <Select options={roles} allowClear />
         </Form.Item>
 
-        <Form.Item name="validTo" label="Действителен до">
-          <DatePicker placeholder="Выберите дату" format={DATE_FORMAT} />
-        </Form.Item>
+        <Space className={styles["form__valid-group-container"]}>
+          <Form.Item name="validTo" label="Действителен до">
+            <DatePicker placeholder="Выберите дату" format={DATE_FORMAT} />
+          </Form.Item>
 
-        <Form.Item name="blocked" label="Заблокировать пользователя">
-          <Switch />
-        </Form.Item>
+          <Form.Item name="blocked" label="Заблокировать">
+            <Switch />
+          </Form.Item>
+        </Space>
 
         <Form.Item>
-          <Space>
+          <Space className={styles["form__buttons-container"]}>
             <Button type="primary" htmlType="submit">
               {userId ? "Сохранить" : "Создать"}
             </Button>
