@@ -1,6 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import styles from "./new-user-page.module.scss";
-import { SubmitHandler } from "react-hook-form";
 import { User } from "@/shared/types";
 import { uid } from "uid";
 import { roles } from "@/shared/mocks";
@@ -13,7 +12,7 @@ import { useUnit } from "effector-react";
 import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
 import { addUserEvent, updateUserEvent } from "../model";
 
-type NewUserType = Omit<User, "id">;
+type NewUser = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
@@ -22,25 +21,16 @@ export const NewUserPage: FC = () => {
   const addUser = useUnit(addUserEvent);
   const updateUser = useUnit(updateUserEvent);
   const [form] = Form.useForm();
-  const formValues = Form.useWatch([], form);
   const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
-  const [submittable, setSubmittable] = useState(false);
   const [isFormChanged, setIsFormChanged] = useState(false);
 
-  useEffect(() => {
-    form
-      .validateFields({ validateOnly: true })
-      .then(() => setSubmittable(true))
-      .catch(() => setSubmittable(false));
-  }, [form, formValues]);
-
-  const openNotificationWithIcon = (type: NotificationType) => {
+  const openNotification = (type: NotificationType) => {
     api[type]({
       message: userId ? "Изменения успешно сохранены!" : "Пользователь успешно создан!",
     });
   };
 
-  const formSubmit: SubmitHandler<NewUserType> = (data): void => {
+  const formSubmit = (data: NewUser): void => {
     if (userId) {
       updateUser({ ...data, id: userId });
     } else {
@@ -48,7 +38,7 @@ export const NewUserPage: FC = () => {
     }
 
     setIsFormChanged(false);
-    openNotificationWithIcon("info");
+    openNotification("info");
   };
 
   return (
@@ -111,7 +101,7 @@ export const NewUserPage: FC = () => {
 
         <Form.Item>
           <Space className={styles["form__buttons-container"]}>
-            <Button type="primary" htmlType="submit" disabled={!submittable || !isFormChanged}>
+            <Button type="primary" htmlType="submit" disabled={!isFormChanged}>
               {userId ? "Сохранить" : "Создать"}
             </Button>
 
