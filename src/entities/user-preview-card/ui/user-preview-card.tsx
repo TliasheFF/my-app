@@ -33,8 +33,8 @@ export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
   }
 
   const { lastName, firstName, patronymic, blocked, email, validTo } = user;
-  const validToDate = dayjs(validTo).format(DATE_FORMAT);
   const { shortName, fullName } = getUserName(lastName, firstName, patronymic);
+  const validToDate = validTo ? dayjs(validTo).format(DATE_FORMAT) : "Не установлено";
   const userRole = roles.find((role) => role.value === user.role);
   const currentStateStyle = styles[blocked ? "card__state_inactive" : "card__state_active"];
 
