@@ -13,7 +13,7 @@ import {
 import { Button, Modal } from "antd";
 import { getUserName } from "../lib/util";
 import { useUnit } from "effector-react";
-import { $users } from "@/app/store/store";
+import { $users } from "@/entities/store/store";
 import dayjs from "dayjs";
 import { DATE_FORMAT } from "@/shared/constants";
 import { deleteUserEvent } from "../model";

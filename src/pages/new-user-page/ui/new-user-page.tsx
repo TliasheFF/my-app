@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { DATE_FORMAT } from "@/shared/constants";
 import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
 import { NotificationType } from "@/shared/types";
-import { $users } from "@/app/store/store";
+import { $users } from "@/entities/store/store";
 import { useUnit } from "effector-react";
 import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
 import { addUserEvent, updateUserEvent } from "../model";
@@ -18,8 +18,7 @@ export const NewUserPage: FC = () => {
   const { userId } = useParams();
   const currentUser = useUnit($users).find((user) => user.id === userId);
   const [api, contextHolder] = notification.useNotification();
-  const addUser = useUnit(addUserEvent);
-  const updateUser = useUnit(updateUserEvent);
+  const [addUser, updateUser] = useUnit([addUserEvent, updateUserEvent]);
   const [form] = Form.useForm();
   const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
   const [isFormChanged, setIsFormChanged] = useState(false);

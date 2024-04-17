@@ -1,4 +1,4 @@
-import { $users } from "@/app/store/store";
+import { $users } from "@/entities/store/store";
 import { createEvent } from "effector";
 
 export const deleteUserEvent = createEvent<string>();
