@@ -13,16 +13,15 @@ import {
 import { Button, Modal } from "antd";
 import { getUserName } from "../lib/util";
 import { useUnit } from "effector-react";
-import { $users } from "@/entities/store/store";
+import { $users, deleteUserEvent } from "@/entities/users-store/users-store";
 import dayjs from "dayjs";
 import { DATE_FORMAT } from "@/shared/constants";
-import { deleteUserEvent } from "../model";
 
-type UserPreviewCardPropsTypes = {
+type UserPreviewCardProps = {
   userId: string;
 };
 
-export const UserPreviewCard: FC<UserPreviewCardPropsTypes> = (props) => {
+export const UserPreviewCard: FC<UserPreviewCardProps> = (props) => {
   const { userId } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useUnit($users).find((user) => user.id === userId);

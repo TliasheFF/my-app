@@ -1,1 +1,0 @@
-export { deleteUserEvent } from "./delete-user";

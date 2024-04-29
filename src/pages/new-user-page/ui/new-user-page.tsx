@@ -7,18 +7,17 @@ import { useParams } from "react-router-dom";
 import { DATE_FORMAT } from "@/shared/constants";
 import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
 import { NotificationType } from "@/shared/types";
-import { $users } from "@/entities/store/store";
+import { $users, addUserEvent, updateUserEvent } from "@/entities/users-store/users-store";
 import { useUnit } from "effector-react";
 import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
-import { addUserEvent, updateUserEvent } from "../model";
 
 type NewUser = Omit<User, "id">;
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
   const currentUser = useUnit($users).find((user) => user.id === userId);
-  const [api, contextHolder] = notification.useNotification();
   const [addUser, updateUser] = useUnit([addUserEvent, updateUserEvent]);
+  const [api, contextHolder] = notification.useNotification();
   const [form] = Form.useForm();
   const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
   const [isFormChanged, setIsFormChanged] = useState(false);
@@ -29,11 +28,11 @@ export const NewUserPage: FC = () => {
     });
   };
 
-  const formSubmit = (data: NewUser): void => {
+  const formSubmit = (formData: NewUser): void => {
     if (userId) {
-      updateUser({ ...data, id: userId });
+      updateUser({ ...formData, id: userId });
     } else {
-      addUser({ ...data, id: uid() });
+      addUser({ ...formData, id: uid() });
     }
 
     setIsFormChanged(false);
