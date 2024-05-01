@@ -76,22 +76,13 @@
     font-size: 16px;
 } 
 
-.card__modal :global(.ant-btn-default) {
-    background: var(--button-background-color);
-    color: var(--button-font-color);
-}
-
-.card__modal :global(.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover) {
-    border-color: var(--button-border-color);
-    color: var(--button-font-color);
-    background-color: var(--button-background-color);
-    opacity: 0.9;
-}
-
+.card__modal :global(.ant-btn-default),
 .card__modal :global(.ant-btn-primary) {
     background: var(--button-background-color);
+    color: var(--button-font-color);
 }
 
+.card__modal :global(.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover),
 .card__modal :global(.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover) {
     border-color: var(--button-border-color);
     color: var(--button-font-color);
