@@ -1,23 +1,9 @@
-export type Theme = {
-    components: {
-        Button: {
-            colorPrimary: string;
-            colorPrimaryHover: string;
-            colorTextDisabled: string;
-            borderColorDisabled: string;
-            primaryShadow: string;
-            algorithm: boolean; 
-        };
-        Form: {
-            labelColor: string;
-        };
-        Switch: {
-            colorPrimary: string;
-            colorPrimaryHover: string;
-        };
-        DatePicker: {
-            colorPrimary: string;
-            colorPrimaryHover: string;
-        };
-    };
+import { OverrideToken } from "antd/es/theme/interface";
+
+type ComponentsConfig = {
+    [key in keyof OverrideToken]?: OverrideToken[key];
+};
+
+export type ThemeConfig = {
+    components: ComponentsConfig;
 };

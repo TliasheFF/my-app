@@ -1,25 +1,15 @@
-import { Theme } from "../types";
+import { ThemeConfig } from "../types";
 
-export const theme: Theme = {
+export const theme: ThemeConfig = {
   components: {
     Button: {
       colorPrimary: "var(--button-background-color)",
-      colorPrimaryHover: "var(--background-hover-color)",
       colorTextDisabled: "var(--font-color-secondary)",
       borderColorDisabled: "var(--disabled-button-border-color)",
       primaryShadow: "none",
-      algorithm: true,
     },
     Form: {
       labelColor: "var(--font-color-primary)",
-    },
-    Switch: {
-      colorPrimary: "var(--button-background-color)",
-      colorPrimaryHover: "var(--background-color-hover-primary)",
-    },
-    DatePicker: {
-      colorPrimary: "var(--button-background-color)",
-      colorPrimaryHover: "var(--background-color-hover-primary)",
     },
   },
 }
