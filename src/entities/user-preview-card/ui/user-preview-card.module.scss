@@ -2,17 +2,11 @@
     display: grid;
 	grid-template-rows: auto 1fr auto;
     text-align: left;
-    border: 1px solid grey;
     border-radius: 10px;
     padding: 10px;
-    background-color: white;
-    color: black;
+    background-color: var(--background-color-secondary);
+    color: var(--font-color-secondary);
     min-width: 250px;
-
-    &:hover {
-        box-shadow: 0 0 8px rgba(199, 199, 199, 0.856);
-        transition: 300ms;
-    }
 }
 
 .card__header {
@@ -39,13 +33,13 @@
 }
 
 .card__state_active{
-    border-bottom: 2px solid green;
-    color: darkgreen;
+    border-bottom: 2px solid var(--active-state-border-color);
+    color: var(--active-state-font-color);
 }
 
 .card__state_inactive{
-    border-bottom: 2px solid red;
-    color: darkred;
+    border-bottom: 2px solid var(--inactive-state-border-color);
+    color: var(--inactive-state-font-color);
 }
 
 .card__info {
@@ -53,7 +47,7 @@
     flex-direction: column;
     font-family: inherit;
     font-size: 14px;
-    color: grey;
+    color: var(--font-color-secondary);
 }
 
 .card__line {
@@ -74,18 +68,4 @@
 
 .card__button-icon {
     font-size: 16px;
-} 
-
-.card__modal :global(.ant-btn-default),
-.card__modal :global(.ant-btn-primary) {
-    background: var(--button-background-color);
-    color: var(--button-font-color);
-}
-
-.card__modal :global(.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover),
-.card__modal :global(.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover) {
-    border-color: var(--button-border-color);
-    color: var(--button-font-color);
-    background-color: var(--button-background-color);
-    opacity: 0.9;
 }

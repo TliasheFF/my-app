@@ -15,35 +15,3 @@
     display: flex;
     justify-content: center;
 }
-
-.form :global(.ant-form) {
-    display: flex;
-    flex-direction: column;
-}
-
-.form :global(.ant-form-vertical .ant-form-item-label > label) {
-    color: white;
-}
-
-.form :global(.ant-btn-primary) {
-    background: var(--button-background-color);
-    box-shadow: none;
-
-    &:disabled {
-        color: var(--button-font-color);
-        opacity: 0.5;
-        border: none;
-    }
-}
-
-.form :global(.ant-btn-primary) {
-    background: var(--button-background-color);
-    box-shadow: none;
-}
-
-.form :global(.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover) {
-    border-color: var(--button-border-color);
-    color: var(--button-font-color);
-    background-color: var(--button-background-color);
-    opacity: 0.8;
-}

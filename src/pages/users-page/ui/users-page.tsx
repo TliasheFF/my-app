@@ -3,6 +3,7 @@ import styles from "./users-page.module.scss";
 import { UserPreviewCard } from "@/entities/user-preview-card";
 import { useUnit } from "effector-react";
 import { $users, deleteUserEvent } from "@/entities/users";
+import { roles } from "@/entities/users";
 
 export const UsersPage: FC = () => {
   const [users, deleteUser] = useUnit([$users, deleteUserEvent]);
@@ -13,9 +14,18 @@ export const UsersPage: FC = () => {
 
   return (
     <div className={styles["cards"]}>
-      {users.map((user) => (
-        <UserPreviewCard key={user.id} user={user} onDeleteUser={deleteUser} />
-      ))}
+      {users.map((user) => {
+        const userRole = roles.find((role) => role.value === user.role);
+
+        return (
+          <UserPreviewCard
+            key={user.id}
+            user={user}
+            role={userRole?.label}
+            onDeleteUser={deleteUser}
+          />
+        );
+      })}
     </div>
   );
 };

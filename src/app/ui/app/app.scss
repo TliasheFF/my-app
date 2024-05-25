@@ -1,13 +1,21 @@
 html,
 body {
     margin: 0;
-    background-color: #242424;
-    color: white;
+    background-color: var(--background-color-primary);
+    color: var(--font-color);
     font-family: system-ui, Arial, sans-serif;
 }
 
 :root {
+    --background-color-primary: #242424;
+    --background-color-secondary: #fff;
+    --font-color-primary: #fff;
+    --font-color-secondary: #525252;
     --button-background-color: #1a1a1a;
-    --button-border-color: #7980ff;
-    --button-font-color: #fff;
+    --background-hover-color: #1a1a1abb;
+    --disabled-button-border-color: #464646;
+    --active-state-border-color: green;
+    --active-state-font-color: darkgreen;
+    --inactive-state-border-color: red;
+    --inactive-state-font-color: darkred;
 }

@@ -13,11 +13,10 @@ import { Button, Modal } from "antd";
 import { getUserName } from "../lib/utils";
 import dayjs from "dayjs";
 import { DATE_FORMAT } from "@/shared/lib/constants";
-import { UserPreviewCardProps } from "../types/user-preview-card-props";
-import { roles } from "@/shared/mocks";
+import { UserPreviewCardProps } from "../types";
 
 export const UserPreviewCard: FC<UserPreviewCardProps> = (props) => {
-  const { user, onDeleteUser } = props;
+  const { user, role, onDeleteUser } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!user) {
@@ -28,7 +27,6 @@ export const UserPreviewCard: FC<UserPreviewCardProps> = (props) => {
   const { shortName, fullName } = getUserName({ lastName, firstName, patronymic });
   const validToDate = validTo ? dayjs(validTo).format(DATE_FORMAT) : "Не установлено";
   const currentStateStyle = styles[blocked ? "card__state_inactive" : "card__state_active"];
-  const userRole = roles.find((role) => role.value === user.role);
   const userState = blocked ? "заблокирован" : "активен";
 
   const showModal = () => {
@@ -58,7 +56,7 @@ export const UserPreviewCard: FC<UserPreviewCardProps> = (props) => {
           <div className={styles["card__icon"]}>
             <UserOutlined />
           </div>
-          {userRole ? userRole.label : "Роль не назначена"}
+          {role ?? "Роль не назначена"}
         </div>
         <div className={styles["card__mail"]}>
           <div className={styles["card__icon"]}>

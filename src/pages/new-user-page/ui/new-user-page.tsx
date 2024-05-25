@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import styles from "./new-user-page.module.scss";
 import { NotificationType } from "@/shared/types";
 import { uid } from "uid";
-import { roles } from "@/shared/mocks";
 import { useParams } from "react-router-dom";
 import { DATE_FORMAT } from "@/shared/lib/constants";
 import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
@@ -10,6 +9,7 @@ import { useUnit } from "effector-react";
 import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
 import { $users, addUserEvent, updateUserEvent } from "@/entities/users";
 import { NewUser } from "../types";
+import { roles } from "@/entities/users";
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();

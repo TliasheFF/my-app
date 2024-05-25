@@ -11,12 +11,12 @@ export const Layout: FC = () => {
           <ul className={styles["navigation"]}>
             <li>
               <Link to="/users">
-                <Button>Пользователи</Button>
+                <Button type="primary">Пользователи</Button>
               </Link>
             </li>
             <li>
               <Link to="/new-user">
-                <Button>Создать пользователя</Button>
+                <Button type="primary">Создать пользователя</Button>
               </Link>
             </li>
           </ul>
