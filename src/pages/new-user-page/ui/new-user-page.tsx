@@ -3,13 +3,14 @@ import styles from "./new-user-page.module.scss";
 import { uid } from "uid";
 import { useParams } from "react-router-dom";
 import { DATE_FORMAT } from "@/shared/lib/constants";
-import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
+import { Button, DatePicker, Form, Input, Select, Space, Switch } from "antd";
 import { useUnit } from "effector-react";
 import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
 import { $users, addUserEvent, updateUserEvent } from "@/entities/users";
-import { NewUser, NotificationType } from "../types";
+import { NewUser } from "../types";
 import { roles } from "@/entities/users";
 import { User } from "@/entities/users/types";
+import { useNotification } from "@/shared/lib/utils/notification";
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
@@ -17,14 +18,8 @@ export const NewUserPage: FC = () => {
   const [addUser, updateUser] = useUnit([addUserEvent, updateUserEvent]);
   const [form] = Form.useForm();
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const [api, contextHolder] = notification.useNotification();
+  const [openNotification, contextHolder] = useNotification();
   const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
-
-  const openNotification = (type: NotificationType) => {
-    api[type]({
-      message: userId ? "Изменения успешно сохранены!" : "Пользователь успешно создан!",
-    });
-  };
 
   const formSubmit = (formData: NewUser): void => {
     if (userId) {
@@ -34,7 +29,9 @@ export const NewUserPage: FC = () => {
     }
 
     setIsFormChanged(false);
-    openNotification("info");
+    openNotification({
+      description: userId ? "Изменения успешно сохранены!" : "Пользователь успешно создан!",
+    });
   };
 
   return (
