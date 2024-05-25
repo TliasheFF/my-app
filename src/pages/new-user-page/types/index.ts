@@ -1,0 +1,1 @@
+export type { NewUser } from './new-user';

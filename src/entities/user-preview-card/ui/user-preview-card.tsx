@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import styles from "./user-preview-card.module.scss";
 import classNames from "classnames";
-import { roles } from "@/shared/mocks";
 import { Link } from "react-router-dom";
 import {
   CalendarOutlined,
@@ -11,38 +10,33 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Button, Modal } from "antd";
-import { getUserName } from "../lib/util";
-import { useUnit } from "effector-react";
-import { $users, deleteUserEvent } from "@/entities/users-store/users-store";
+import { getUserName } from "../lib/utils";
 import dayjs from "dayjs";
-import { DATE_FORMAT } from "@/shared/constants";
-
-type UserPreviewCardProps = {
-  userId: string;
-};
+import { DATE_FORMAT } from "@/shared/lib/constants";
+import { UserPreviewCardProps } from "../types/user-preview-card-props";
+import { roles } from "@/shared/mocks";
 
 export const UserPreviewCard: FC<UserPreviewCardProps> = (props) => {
-  const { userId } = props;
+  const { user, onDeleteUser } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const user = useUnit($users).find((user) => user.id === userId);
-  const deleteUser = useUnit(deleteUserEvent);
 
   if (!user) {
     return null;
   }
 
   const { lastName, firstName, patronymic, blocked, email, validTo } = user;
-  const { shortName, fullName } = getUserName(lastName, firstName, patronymic);
+  const { shortName, fullName } = getUserName({ lastName, firstName, patronymic });
   const validToDate = validTo ? dayjs(validTo).format(DATE_FORMAT) : "Не установлено";
-  const userRole = roles.find((role) => role.value === user.role);
   const currentStateStyle = styles[blocked ? "card__state_inactive" : "card__state_active"];
+  const userRole = roles.find((role) => role.value === user.role);
+  const userState = blocked ? "заблокирован" : "активен";
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleModalConfirm = () => {
-    deleteUser(userId);
+    onDeleteUser(user.id);
     setIsModalOpen(false);
   };
 
@@ -56,9 +50,7 @@ export const UserPreviewCard: FC<UserPreviewCardProps> = (props) => {
         <p className={styles["card__name"]} title={fullName}>
           {shortName}
         </p>
-        <span className={classNames(styles["card__state"], currentStateStyle)}>
-          {blocked ? "заблокирован" : "активен"}
-        </span>
+        <span className={classNames(styles["card__state"], currentStateStyle)}>{userState}</span>
       </div>
 
       <div className={styles["card__info"]}>
@@ -86,7 +78,7 @@ export const UserPreviewCard: FC<UserPreviewCardProps> = (props) => {
 
       <div className={styles["card__footer"]}>
         <Button>
-          <Link to={`/users/${userId}`}>
+          <Link to={`/users/${user.id}`}>
             <EditOutlined className={styles["card__button-icon"]} title="Редактировать" />
           </Link>
         </Button>

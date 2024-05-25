@@ -1,5 +1,3 @@
-# React + TypeScript + Vite
-
 ## Start project
 
 1. Select branch main

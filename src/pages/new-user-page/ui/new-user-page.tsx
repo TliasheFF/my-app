@@ -1,17 +1,15 @@
 import { FC, useState } from "react";
 import styles from "./new-user-page.module.scss";
-import { User } from "@/shared/types";
+import { NotificationType } from "@/shared/types";
 import { uid } from "uid";
 import { roles } from "@/shared/mocks";
 import { useParams } from "react-router-dom";
-import { DATE_FORMAT } from "@/shared/constants";
+import { DATE_FORMAT } from "@/shared/lib/constants";
 import { Button, DatePicker, Form, Input, Select, Space, Switch, notification } from "antd";
-import { NotificationType } from "@/shared/types";
-import { $users, addUserEvent, updateUserEvent } from "@/entities/users-store/users-store";
 import { useUnit } from "effector-react";
 import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
-
-type NewUser = Omit<User, "id">;
+import { $users, addUserEvent, updateUserEvent } from "@/entities/users";
+import { NewUser } from "../types";
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
@@ -19,8 +17,8 @@ export const NewUserPage: FC = () => {
   const [addUser, updateUser] = useUnit([addUserEvent, updateUserEvent]);
   const [api, contextHolder] = notification.useNotification();
   const [form] = Form.useForm();
-  const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
   const [isFormChanged, setIsFormChanged] = useState(false);
+  const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
 
   const openNotification = (type: NotificationType) => {
     api[type]({

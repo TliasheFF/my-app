@@ -7,7 +7,7 @@ export type User = {
     firstName: string;
     lastName: string;
     patronymic: string;
-    role: string;
+    role: string | null;
     email: string;
     login: string;
     validTo: dayjs.Dayjs;

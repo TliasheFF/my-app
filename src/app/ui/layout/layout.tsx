@@ -25,7 +25,6 @@ export const Layout: FC = () => {
       <main className={styles["main"]}>
         <Outlet />
       </main>
-      <footer className={styles["footer"]}></footer>
     </div>
   );
 };

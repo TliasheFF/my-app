@@ -2,7 +2,7 @@ import { NewUserPage } from "@/pages/new-user-page";
 import { NotFoundPage } from "@/pages/not-found-page";
 import { UsersPage } from "@/pages/users-page";
 import { createBrowserRouter } from "react-router-dom";
-import { Layout } from "../layout/layout";
+import { Layout } from "../ui/layout";
 
 export const router = createBrowserRouter([
   {
