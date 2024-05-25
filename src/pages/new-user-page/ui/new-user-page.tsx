@@ -9,14 +9,15 @@ import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
 import { $users, addUserEvent, updateUserEvent } from "@/entities/users";
 import { NewUser, NotificationType } from "../types";
 import { roles } from "@/entities/users";
+import { User } from "@/entities/users/types";
 
 export const NewUserPage: FC = () => {
   const { userId } = useParams();
-  const currentUser = useUnit($users).find((user) => user.id === userId);
+  const currentUser = useUnit($users).find((user: User) => user.id === userId);
   const [addUser, updateUser] = useUnit([addUserEvent, updateUserEvent]);
-  const [api, contextHolder] = notification.useNotification();
   const [form] = Form.useForm();
   const [isFormChanged, setIsFormChanged] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
   const formInitialValues = currentUser ?? NEW_USER_DEFAULT_VALUES;
 
   const openNotification = (type: NotificationType) => {
