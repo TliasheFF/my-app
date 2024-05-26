@@ -1,6 +1,6 @@
 import { createEvent, createStore, sample } from "effector";
 import { users } from "../mocks";
-import { User, Users } from "@/shared/types";
+import { User, Users } from "../types";
 
 export const $users = createStore<Users>(users);
 export const addUserEvent = createEvent<User>();

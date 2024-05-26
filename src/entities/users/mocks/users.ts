@@ -1,5 +1,5 @@
-import { Users } from "@/shared/types";
 import dayjs from "dayjs";
+import { Users } from "../types";
 
 export const users: Users = [
     {

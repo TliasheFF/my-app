@@ -2,8 +2,7 @@ import { FC } from "react";
 import styles from "./users-page.module.scss";
 import { UserPreviewCard } from "@/entities/user-preview-card";
 import { useUnit } from "effector-react";
-import { $users, deleteUserEvent } from "@/entities/users";
-import { roles } from "@/entities/users";
+import { $users, deleteUserEvent, roles } from "@/entities/users";
 
 export const UsersPage: FC = () => {
   const [users, deleteUser] = useUnit([$users, deleteUserEvent]);
