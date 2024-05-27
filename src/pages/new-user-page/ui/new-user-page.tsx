@@ -8,7 +8,7 @@ import { useUnit } from "effector-react";
 import { NEW_USER_DEFAULT_VALUES, ERROR_MESSAGE } from "../lib/constants";
 import { $users, addUserEvent, roles, updateUserEvent } from "@/entities/users";
 import { NewUser } from "../types";
-import { useNotification } from "@/shared/lib/utils/notification";
+import { useNotification } from "@/shared/lib/utils";
 import { User } from "@/entities/users/types";
 
 export const NewUserPage: FC = () => {
