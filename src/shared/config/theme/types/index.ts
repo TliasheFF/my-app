@@ -1,1 +1,1 @@
-export type { ThemeConfig } from "./theme";
+export type { ThemeConfig, ComponentsConfig } from "./theme";

@@ -1,4 +1,4 @@
-import { User } from "@/shared/types";
+import { User } from "./user";
 
 export type UserPreviewCardProps = {
     user: User;

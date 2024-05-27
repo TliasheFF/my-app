@@ -1,6 +1,6 @@
 import { OverrideToken } from "antd/es/theme/interface";
 
-type ComponentsConfig = {
+export type ComponentsConfig = {
     [key in keyof OverrideToken]?: OverrideToken[key];
 };
 
