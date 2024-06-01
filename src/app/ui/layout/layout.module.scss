@@ -9,6 +9,8 @@
     position: sticky;
     top: 0;
     text-align: center;
+    background-color: var(--background-color-primary);
+    z-index: 1;
 }
 
 .navigation {

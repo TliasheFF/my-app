@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import styles from "./new-user-page.module.scss";
+import styles from "./user-page.module.scss";
 import { uid } from "uid";
 import { useParams } from "react-router-dom";
 import { DATE_FORMAT } from "@/shared/lib/constants";
@@ -11,7 +11,7 @@ import { NewUser } from "../types";
 import { useNotification } from "@/shared/lib/utils";
 import { User } from "@/entities/users/types";
 
-export const NewUserPage: FC = () => {
+export const UserPage: FC = () => {
   const { userId } = useParams();
   const currentUser = useUnit($users).find((user: User) => user.id === userId);
   const [addUser, updateUser] = useUnit([addUserEvent, updateUserEvent]);
@@ -37,25 +37,18 @@ export const NewUserPage: FC = () => {
     <div className={styles["form"]}>
       {contextHolder}
       <Form
+        validateMessages={{ required: ERROR_MESSAGE }}
         layout="vertical"
         form={form}
         initialValues={formInitialValues}
         onFinish={formSubmit}
         onValuesChange={() => setIsFormChanged(true)}
       >
-        <Form.Item
-          name="lastName"
-          label="Фамилия"
-          rules={[{ required: true, message: ERROR_MESSAGE }]}
-        >
+        <Form.Item name="lastName" label="Фамилия" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item
-          name="firstName"
-          label="Имя"
-          rules={[{ required: true, message: ERROR_MESSAGE }]}
-        >
+        <Form.Item name="firstName" label="Имя" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
@@ -73,7 +66,7 @@ export const NewUserPage: FC = () => {
           <Input placeholder="name@example.com" />
         </Form.Item>
 
-        <Form.Item name="login" label="Логин" rules={[{ required: true, message: ERROR_MESSAGE }]}>
+        <Form.Item name="login" label="Логин" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
